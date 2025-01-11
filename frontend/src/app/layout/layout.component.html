@@ -1,1 +1,23 @@
-<p>layout works!</p>
+<div class="flex h-screen bg-gray-100">
+    <!-- Sidebar -->
+    <div class="w-64 bg-gray-800 text-white p-4 flex flex-col">
+      <h1 class="text-2xl font-bold text-center text-green-500 mb-6">Admin Panel</h1>
+      <ul class="space-y-4">
+        <li><a routerLink="/admin/products" routerLinkActive="text-green-400">Products</a></li>
+        <li><a routerLink="/admin/categories" routerLinkActive="text-green-400">Categories</a></li>
+        <li><a routerLink="/admin/purchases" routerLinkActive="text-green-400">Purchases</a></li>
+      </ul>
+      <!-- Logout Button -->
+      <div class="mt-auto">
+        <button 
+          class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-600"
+          (click)="logout()">Logout</button>
+      </div>
+    </div>
+  
+    <!-- Main Content Area -->
+    <div class="flex-1 p-6 overflow-y-auto">
+      <router-outlet></router-outlet> <!-- Dynamic Content Loading -->
+    </div>
+  </div>
+  

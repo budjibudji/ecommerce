@@ -101,7 +101,7 @@
 
 <body>
     <app-root></app-root>
-    <link rel="modulepreload" href="frontend/browser/chunk-X7MXKGSK.js">
+    <link rel="modulepreload" href="frontend/browser/chunk-SZAMMJ45.js">
     <script src="frontend/browser/polyfills.js" type="module"></script>
     <script src="frontend/browser/main.js" type="module"></script>
 </body>
