@@ -19,7 +19,7 @@ class Purchase extends Model
         'product_id',
         'quantity',
         'price',
-        'purchase_id'
+        'purchase_recap_id'
     ];
 
     /**

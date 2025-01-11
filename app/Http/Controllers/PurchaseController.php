@@ -67,7 +67,7 @@ class PurchaseController
 
             $purchaseData[] = [
                 'product_id' => $cart->product->id,
-                'purchase_id' => $purchase->id,
+                'purchase_recap_id' => $purchase->id,
                 'quantity' => $cart->quantity,
                 'price' => $cart->product->price,
                 'created_at' => now(),

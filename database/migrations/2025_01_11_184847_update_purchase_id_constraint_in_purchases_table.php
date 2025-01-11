@@ -14,10 +14,10 @@ class UpdatePurchaseIdConstraintInPurchasesTable extends Migration
     public function up()
     {
         Schema::table('purchases', function (Blueprint $table) {
-            $table->unsignedBigInteger('purchase_id')->nullable(); // User ID column (nullable for optional association)
+            $table->unsignedBigInteger('purchase_recap_id')->nullable(); // User ID column (nullable for optional association)
 
             // Add a new foreign key constraint that references `purchase_recaps.id`
-            $table->foreign('purchase_id')->references('id')->on('purchase_recaps')->onDelete('cascade');
+            $table->foreign('purchase_recap_id')->references('id')->on('purchase_recaps')->onDelete('cascade');
         });
     }
 
@@ -30,10 +30,10 @@ class UpdatePurchaseIdConstraintInPurchasesTable extends Migration
     {
         Schema::table('purchases', function (Blueprint $table) {
             // Drop the new foreign key constraint
-            $table->dropForeign(['purchase_id']);
+            $table->dropForeign(['purchase_recap_id']);
 
             // Optionally, add back the old constraint if necessary
-            // $table->foreign('purchase_id')->references('old_table_column')->on('old_table')->onDelete('cascade');
+            // $table->foreign('purchase_recap_id')->references('old_table_column')->on('old_table')->onDelete('cascade');
         });
     }
 }
