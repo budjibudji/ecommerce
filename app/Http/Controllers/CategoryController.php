@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -114,6 +115,10 @@ class CategoryController
         // Delete the category's image if exists
         $category->update([
             'is_deleted' => true,
+        ]);
+
+        Product::where('category_id', $category->id)->update([
+            'is_deleted' => true,  // You can also mark the products as deleted, depending on your requirement
         ]);
 
         return response()->json(['message' => 'Category deleted successfully']);

@@ -3,6 +3,7 @@ import { ProductService } from '../product.service';
 import { CategoryService } from '../category.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; // <-- Import CommonModule here
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-create',
@@ -24,7 +25,8 @@ export class ProductCreateComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -66,6 +68,7 @@ export class ProductCreateComponent implements OnInit {
     this.productService.createProduct(formData).subscribe(
       () => {
         alert('Product created successfully');
+        this.router.navigate(['/admin/products']);
       },
       (error) => {
         console.error('Error creating product:', error);
