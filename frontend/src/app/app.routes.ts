@@ -8,8 +8,26 @@ import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { DashboardGuard } from './auth/dashboardadmin.guard';
+import { CategoriesListComponent } from './categories-list/categories-list.component';
+import { categoryCreateComponent } from './category-create/category-create.component';
+import { categoryEditComponent } from './category-edit/category-edit.component';
 
 export const routes: Routes = [
+  {
+    path: 'admin/categories/create',
+    component: categoryCreateComponent,
+    canActivate: [DashboardGuard],
+  },
+  {
+    path: 'admin/categories/edit/:id',
+    component: categoryEditComponent,
+    canActivate: [DashboardGuard],
+  },
+  {
+    path: 'admin/categories',
+    component: CategoriesListComponent,
+    canActivate: [DashboardGuard],
+  },
   {
     path: 'admin/products',
     component: ProductsListComponent,
