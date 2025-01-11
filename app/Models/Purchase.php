@@ -19,15 +19,13 @@ class Purchase extends Model
         'product_id',
         'quantity',
         'price',
+        'purchase_id'
     ];
 
     /**
      * Get the user that made the purchase.
      */
-    public function user()
-    {
-        return $this->belongsTo(User::class); // A purchase belongs to one user
-    }
+
 
     /**
      * Get the product that was purchased.
@@ -35,6 +33,11 @@ class Purchase extends Model
     public function product()
     {
         return $this->belongsTo(Product::class); // A purchase belongs to one product
+    }
+
+    public function purchase()
+    {
+        return $this->belongsTo(PurchaseRecap::class); // A purchase belongs to one product
     }
 
     /**

@@ -279,7 +279,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"product_id\":\"3\",\n    \"quantity\":77\n}",
+							"raw": "{\n    \"product_id\":\"2\",\n    \"quantity\":8\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -387,7 +387,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"carts\": [\"2\"\n    ]\n}",
+							"raw": "{\n    \"carts\": [\"1\",\"2\"\n    ],\n    \"address\":\"aaaa\",\n    \"phone_number\":\"77777\"\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -437,7 +437,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"user@user.com\",\"password\":\"useruser\"\n}",
+							"raw": "{\n    \"email\":\"john@example.com\",\"password\":\"password123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -472,7 +472,7 @@
 	"auth": {
 		"type": "bearer",
 		"bearer": {
-			"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2FkbWluL2xvZ2luIiwiaWF0IjoxNzM2NTk5Mzc1LCJleHAiOjE3MzY2MDI5NzUsIm5iZiI6MTczNjU5OTM3NSwianRpIjoiYUZVWGRKMVZTa09LRmtTUyIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3IiwiaXNfYWRtaW4iOjF9.xq_UI7k5NpxHyFxyBpon018RafQuwXepKSMDWyYzB40"
+			"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2N1c3RvbWVyL2xvZ2luIiwiaWF0IjoxNzM2NjIyMDU4LCJleHAiOjQ4OTIyOTU2NTgsIm5iZiI6MTczNjYyMjA1OCwianRpIjoiOWxXWk50N3RtWmJUWTFWUyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3IiwiaXNfYWRtaW4iOjB9.f0Y1ql46BMROf--sa9hhVd2SsPqHN4GNLhogtO6PGRM"
 		}
 	},
 	"event": [

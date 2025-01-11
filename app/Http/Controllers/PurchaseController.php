@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\PurchaseRecap;
 use App\Models\Purchase;
+
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -23,9 +25,9 @@ class PurchaseController
         }
 
         if ($user->is_admin) {
-            $purchase = Purchase::with(['product', 'user'])->get();
+            $purchase = PurchaseRecap::with(['purchases', 'user'])->get();
         } else {
-            $purchase = Purchase::with(['product', 'user'])->where('user_id', $user->id)->get();
+            $purchase = PurchaseRecap::with(['purchases', 'user'])->where('user_id', $user->id)->get();
         }
 
         return response()->json($purchase);
@@ -39,6 +41,9 @@ class PurchaseController
         // Validate incoming request for bulk purchases
         $request->validate([
             'carts' => 'required|array', // An array of purchases
+            'address' => 'required|string',
+            'phone_number' => 'required|string',
+
 
         ]);
 
@@ -49,18 +54,33 @@ class PurchaseController
         $purchaseData = [];
 
         // Loop through each purchase and prepare the data for insertion
+        $purchase = PurchaseRecap::create([
+            'user_id' => $user->id,
+            'address' => $request->address,
+            'phone_number' => $request->phone_number,
+
+        ]);
         foreach ($request->carts as $cart_id) {
             $cart = Cart::where('id', $cart_id)->with("product")
                 ->first();
 
+
             $purchaseData[] = [
-                'user_id' => $user->id,
                 'product_id' => $cart->product->id,
+                'purchase_id' => $purchase->id,
                 'quantity' => $cart->quantity,
                 'price' => $cart->product->price,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
+            $product = Product::where('id', $cart->product->id)
+                ->first();
+
+            $product->update([
+
+                'stock' => $product->stock - $cart->quantity,
+
+            ]);
         }
 
         // Insert multiple purchases in the database
