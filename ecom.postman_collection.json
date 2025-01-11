@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "48f4dd90-7c2e-45f9-bf61-900730863415",
 		"name": "ecom",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "11298270"
 	},
 	"item": [
@@ -29,18 +29,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "http://localhost:8000/api/categories",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"categories"
-							]
-						}
+						"url": "http://localhost:8000/api/categories"
 					},
 					"response": []
 				},
@@ -49,18 +38,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/api/categories",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"categories"
-							]
-						}
+						"url": "http://localhost:8000/api/categories"
 					},
 					"response": []
 				},
@@ -69,19 +47,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/api/categories/5",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"categories",
-								"5"
-							]
-						}
+						"url": "http://localhost:8000/api/categories/5"
 					},
 					"response": []
 				},
@@ -136,19 +102,7 @@
 							"mode": "formdata",
 							"formdata": []
 						},
-						"url": {
-							"raw": "http://localhost:8000/api/categories/4",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"categories",
-								"4"
-							]
-						}
+						"url": "http://localhost:8000/api/categories/5"
 					},
 					"response": []
 				}
@@ -202,18 +156,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "http://localhost:8000/api/products",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"products"
-							]
-						}
+						"url": "http://localhost:8000/api/products"
 					},
 					"response": []
 				},
@@ -289,18 +232,16 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/api/products",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"products"
-							]
-						}
+						"url": "http://localhost:8000/api/products"
+					},
+					"response": []
+				},
+				{
+					"name": "list Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8000/api/products/category/5"
 					},
 					"response": []
 				},
@@ -309,19 +250,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/api/products/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"products",
-								"1"
-							]
-						}
+						"url": "http://localhost:8000/api/products/1"
 					},
 					"response": []
 				},
@@ -334,19 +263,7 @@
 							"mode": "formdata",
 							"formdata": []
 						},
-						"url": {
-							"raw": "http://localhost:8000/api/products/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"products",
-								"1"
-							]
-						}
+						"url": "http://localhost:8000/api/products/4"
 					},
 					"response": []
 				}
@@ -369,18 +286,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8000/api/carts",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"carts"
-							]
-						}
+						"url": "http://localhost:8000/api/carts"
 					},
 					"response": []
 				},
@@ -398,19 +304,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8000/api/carts/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"carts",
-								"1"
-							]
-						}
+						"url": "http://localhost:8000/api/carts/1"
 					},
 					"response": []
 				},
@@ -419,18 +313,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/api/carts",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"carts"
-							]
-						}
+						"url": "http://localhost:8000/api/carts"
 					},
 					"response": []
 				},
@@ -443,19 +326,7 @@
 							"mode": "formdata",
 							"formdata": []
 						},
-						"url": {
-							"raw": "http://localhost:8000/api/carts/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"carts",
-								"1"
-							]
-						}
+						"url": "http://localhost:8000/api/carts/1"
 					},
 					"response": []
 				}
@@ -478,18 +349,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8000/api/wishlists",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"wishlists"
-							]
-						}
+						"url": "http://localhost:8000/api/wishlists"
 					},
 					"response": []
 				},
@@ -498,18 +358,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/api/wishlists",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"wishlists"
-							]
-						}
+						"url": "http://localhost:8000/api/wishlists"
 					},
 					"response": []
 				},
@@ -522,19 +371,7 @@
 							"mode": "formdata",
 							"formdata": []
 						},
-						"url": {
-							"raw": "http://localhost:8000/api/wishlists/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"wishlists",
-								"1"
-							]
-						}
+						"url": "http://localhost:8000/api/wishlists/1"
 					},
 					"response": []
 				}
@@ -557,18 +394,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8000/api/purchases",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"purchases"
-							]
-						}
+						"url": "http://localhost:8000/api/purchases"
 					},
 					"response": []
 				},
@@ -577,18 +403,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/api/purchases",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"purchases"
-							]
-						}
+						"url": "http://localhost:8000/api/purchases"
 					},
 					"response": []
 				}
@@ -611,19 +426,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8000/api/customer/register",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"customer",
-								"register"
-							]
-						}
+						"url": "http://localhost:8000/api/customer/register"
 					},
 					"response": []
 				},
@@ -641,18 +444,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8000/api/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"login"
-							]
-						}
+						"url": "http://localhost:8000/api/customer/login"
 					},
 					"response": []
 				},
@@ -670,18 +462,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8000/api/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"login"
-							]
-						}
+						"url": "http://localhost:8000/api/admin/login"
 					},
 					"response": []
 				}
@@ -690,13 +471,9 @@
 	],
 	"auth": {
 		"type": "bearer",
-		"bearer": [
-			{
-				"key": "token",
-				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzM2NDYyNzA0LCJleHAiOjE3MzY0NjYzMDQsIm5iZiI6MTczNjQ2MjcwNCwianRpIjoiVWdSdVhpRVAzU2UzalNhbCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3IiwiaXNfYWRtaW4iOjF9.7I4n8L4ybF3AX9DvKAbgRRENhRkisC8ZbecNuQAK2c0",
-				"type": "string"
-			}
-		]
+		"bearer": {
+			"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2FkbWluL2xvZ2luIiwiaWF0IjoxNzM2NTk5Mzc1LCJleHAiOjE3MzY2MDI5NzUsIm5iZiI6MTczNjU5OTM3NSwianRpIjoiYUZVWGRKMVZTa09LRmtTUyIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3IiwiaXNfYWRtaW4iOjF9.xq_UI7k5NpxHyFxyBpon018RafQuwXepKSMDWyYzB40"
+		}
 	},
 	"event": [
 		{
