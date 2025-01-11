@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Ffrontend</title>
+    <title>Frontend</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -94,16 +94,16 @@
             line-height: inherit
         }
     </style>
-    <link rel="stylesheet" href="frontend/browser/styles-DSHXUKRT.css" media="print" onload="this.media='all'"><noscript>
-        <link rel="stylesheet" href="frontend/browser/styles-DSHXUKRT.css">
+    <link rel="stylesheet" href="frontend/browser/styles.css" media="print" onload="this.media='all'"><noscript>
+        <link rel="stylesheet" href="frontend/browser/styles.css">
     </noscript>
 </head>
 
 <body>
     <app-root></app-root>
     <link rel="modulepreload" href="frontend/browser/chunk-X7MXKGSK.js">
-    <script src="frontend/browser/polyfills-FFHMD2TL.js" type="module"></script>
-    <script src="frontend/browser/main-SFN7P7LX.js" type="module"></script>
+    <script src="frontend/browser/polyfills.js" type="module"></script>
+    <script src="frontend/browser/main.js" type="module"></script>
 </body>
 
 </html>

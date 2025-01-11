@@ -63,23 +63,33 @@
         </select>
       </div>
   
-      <!-- Product Image Upload -->
-      <div class="mb-4">
-        <label for="image" class="block text-sm font-semibold text-gray-700">Product Image</label>
+        <!-- Product Image Upload -->
+    <div class="mb-4">
+      <label for="image" class="block text-sm font-semibold text-gray-700">Product Image</label>
+      
+      <!-- Custom File Input -->
+      <div class="relative">
         <input
           id="image"
           type="file"
-          [(ngModel)]="product.image"
           (change)="onImageChange($event)"
           name="image"
-          class="w-full border-2 border-gray-300 rounded-md p-2 mt-1 focus:outline-none focus:border-green-500"
+          class="absolute inset-0 opacity-0 cursor-pointer"
         />
-        <div *ngIf="imagePreview" class="mt-2">
-          <p class="text-sm text-gray-600">Preview:</p>
-          <img [src]="imagePreview" alt="Image Preview" class="w-32 h-32 object-cover rounded-md mt-2" />
-        </div>
+        <button
+          type="button"
+          class="w-full py-2 px-4 border-2 border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-100 focus:outline-none"
+        >
+          Choose Image
+        </button>
       </div>
-  
+      
+      <!-- Image Preview -->
+      <div *ngIf="imagePreview" class="mt-2">
+        <p class="text-sm text-gray-600">Preview:</p>
+        <img [src]="imagePreview" alt="Image Preview" class="w-32 h-32 object-cover rounded-md mt-2" />
+      </div>
+    </div>
       <!-- Submit Button -->
       <button
         type="submit"

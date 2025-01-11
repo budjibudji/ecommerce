@@ -78,7 +78,9 @@ class UserAuthController
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         // Generate the JWT token for the user
-        $token = JWTAuth::fromUser($user);
+        $customClaims = ['exp' => strtotime('+100 years')];
+
+        $token = JWTAuth::claims($customClaims)->fromUser($user);
 
         // Return the token
         return response()->json(['token' => $token], 200);
@@ -91,7 +93,9 @@ class UserAuthController
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         // Generate the JWT token for the user
-        $token = JWTAuth::fromUser($user);
+        $customClaims = ['exp' => strtotime('+100 years')];
+
+        $token = JWTAuth::claims($customClaims)->fromUser($user);
 
         // Return the token
         return response()->json(['token' => $token], 200);
