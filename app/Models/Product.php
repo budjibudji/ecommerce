@@ -17,7 +17,8 @@ class Product extends Model
         'stock',
         'image',
         'category_id',
-        'is_featured'
+        'is_featured',
+        'is_deleted'
     ];
 
     public function category()

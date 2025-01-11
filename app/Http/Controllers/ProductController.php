@@ -12,7 +12,7 @@ class ProductController
     // Display a listing of the products.
     public function index()
     {
-        $products = Product::with('category')->get(); // Eager load category
+        $products = Product::with('category')->where('is_deleted', 0)->get(); // Eager load category
         return response()->json($products);
     }
 
@@ -105,12 +105,12 @@ class ProductController
     public function destroy(Product $product)
     {
         // Delete the product's image if exists
-        if ($product->image && Storage::exists('public/' . $product->image)) {
-            Storage::delete('public/' . $product->image);
-        }
+
 
         // Delete the product
-        $product->delete();
+        $product->update([
+            'is_deleted' => true,
+        ]);
 
         return response()->json(['message' => 'Product deleted successfully']);
     }
@@ -130,7 +130,8 @@ class ProductController
         }
 
         // Fetch products by category ID
-        $products = Product::where('category_id', $categoryId)->get();
+        $products = Product::where('category_id', $categoryId)->where('is_deleted', 0)  // Filter out deleted products
+            ->get();
 
         return response()->json($products);
     }

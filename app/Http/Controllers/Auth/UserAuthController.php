@@ -65,6 +65,32 @@ class UserAuthController
 
 
         // Generate the JWT token for the user
+
+        // Return the token
+        return $user;
+    }
+
+    public function customerlogin(Request $request)
+    {
+        $user = $this->login($request);
+
+        if ($user->is_admin) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        // Generate the JWT token for the user
+        $token = JWTAuth::fromUser($user);
+
+        // Return the token
+        return response()->json(['token' => $token], 200);
+    }
+    public function adminlogin(Request $request)
+    {
+        $user = $this->login($request);
+
+        if (!$user->is_admin) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        // Generate the JWT token for the user
         $token = JWTAuth::fromUser($user);
 
         // Return the token

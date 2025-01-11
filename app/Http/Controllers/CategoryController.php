@@ -19,7 +19,7 @@ class CategoryController
     {
         // Get all categories
 
-        $categories = Category::with('products')->get();
+        $categories = Category::with('products')->where("is_deleted", 0)->get();
         return response()->json($categories);
     }
 
@@ -112,12 +112,9 @@ class CategoryController
     public function destroy(Category $category)
     {
         // Delete the category's image if exists
-        if ($category->image && Storage::exists('public/' . $category->image)) {
-            Storage::delete('public/' . $category->image);
-        }
-
-        // Delete the category record
-        $category->delete();
+        $category->update([
+            'is_deleted' => true,
+        ]);
 
         return response()->json(['message' => 'Category deleted successfully']);
     }

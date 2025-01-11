@@ -14,7 +14,8 @@ use App\Http\Controllers\WishlistController;
 
 
 Route::post('customer/register', [UserAuthController::class, 'register']);
-Route::post('login', [UserAuthController::class, 'login']);
+Route::post('customer/login', [UserAuthController::class, 'customerlogin']);
+Route::post('admin/login', [UserAuthController::class, 'adminlogin']);
 
 // Route::get('user/profile', [UserAuthController::class, 'profile'])->middleware(JwtAuthMiddleware::class);
 Route::get('categories', [CategoryController::class, 'index']);         // Get all categories

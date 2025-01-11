@@ -18,6 +18,7 @@ class Category extends Model
         'name',
         'slug',
         'image',
+        'is_deleted'
     ];
 
     /**
@@ -25,7 +26,7 @@ class Category extends Model
      */
     public function products()
     {
-        return $this->hasMany(Product::class); // Each category has many products
+        return $this->hasMany(Product::class)->where('is_deleted', 0); // Each category has many products
     }
 
     /**
