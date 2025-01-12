@@ -1,28 +1,25 @@
 <div class="min-h-screen flex flex-col bg-white">
     <!-- Header -->
-    <header class="bg-green-700 text-white  ">
+    <header class="bg-green-700 text-white">
       <div class="container mx-auto flex justify-between items-center px-6 py-2">
-        
         <!-- Left: Contact Email with Mail Icon -->
         <div class="flex items-center space-x-2">
-          <!-- Mail Icon -->
           <i class="fas fa-envelope text-white"></i>
           <a href="mailto:contact@example.com" class="text-white font-extrabold hover:text-gray-200">contact&#64;example.com</a>
         </div>
   
         <!-- Right: Social Icons (Facebook and Instagram) -->
         <div class="flex items-center space-x-4">
-          <!-- Facebook Icon -->
           <a href="https://facebook.com" target="_blank" class="bg-white text-green-700 rounded-full flex items-center justify-center p-4 h-2 w-4 hover:bg-gray-200">
-            <i class="fab fa-facebook-f"></i> <!-- FontAwesome Icon for Facebook -->
+            <i class="fab fa-facebook-f"></i>
           </a>
-          
-          <!-- Instagram Icon -->
+  
           <a href="https://instagram.com" target="_blank" class="bg-white text-green-700 rounded-full flex items-center justify-center p-4 h-2 w-4 hover:bg-gray-200">
-            <i class="fab fa-instagram"></i> <!-- FontAwesome Icon for Instagram -->
+            <i class="fab fa-instagram"></i>
           </a>
         </div>
       </div>
+  
       <section class="bg-white w-full py-2 border-b border-gray-200">
         <div class="container mx-auto flex items-center justify-start px-6">
           <!-- Logo on the left -->
@@ -30,9 +27,120 @@
         </div>
       </section>
     </header>
+  <div class="bg-white sticky top-0 z-50 relative">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between bg-white  z-50">
+        <!-- Left Section (Categories Dropdown) -->
+        <div class="relative">
+          <button id="categories-button" class="text-black font-bold flex items-center space-x-2" (click)="toggleDropdown()">
+            <i class="fas fa-stream text-lg"></i>
+            <span>Categories</span>
+          </button>
+      
+          <!-- Categories Dropdown -->
+          <div id="categories-dropdown" *ngIf="isDropdownOpen" class="absolute bg-white text-black shadow-md w-48 mt-2 rounded-md overflow-hidden z-50">
+            <ul class="py-2">
+              <li *ngFor="let category of categories" class="px-4 py-2 hover:bg-gray-100 flex items-center space-x-3">
+                <!-- Wrap the entire li in a link -->
+                <a [routerLink]="['/category', category.id]" class="w-full flex items-center space-x-3">
+                  <!-- Category Image -->
+                  <img *ngIf="category.image" [src]="'http://localhost:8000/storage/' + category.image" alt="{{ category.name }}" class="h-6 w-6 rounded-full">
+                  <span class="font-bold">{{ category.name }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      
+        <!-- Center Section (Navigation Links) -->
+        <div class="flex space-x-6 text-black hidden lg:flex">
+          <a routerLink="/" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="hover:text-gray-500">Acceuil</a>
+          <a routerLink="/top-vente" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="hover:text-gray-500">Top Vente</a>
+          
+          <a routerLink="/promo" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="hover:text-gray-500">Promo</a>
+          <a routerLink="/new-arriving" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="hover:text-gray-500">Nouvel arrivage</a>
+
+          <a routerLink="/about" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="hover:text-gray-500">About</a>
+        </div>
+      
+        <!-- Right Section (Profile & Icons) -->
+        <div class="flex items-center space-x-6 hidden lg:flex">
+          <!-- Profile Icon with Dropdown -->
+          <div class="relative">
+            <button class="flex items-center text-black font-bold" (click)="toggleProfileDropdown()">
+              <i class="fas fa-user-circle text-xl"></i>
+            </button>
+      
+            <!-- Profile Dropdown -->
+            <div *ngIf="isProfileDropdownOpen" class="absolute right-0 bg-white text-black shadow-md rounded-md mt-2 z-50">
+              <ul class="py-2">
+                <!-- Show Logout option if logged in -->
+                <li *ngIf="isLoggedIn" class="px-4 py-2 hover:bg-gray-100">
+                  <a (click)="logout()" class="font-bold w-full cursor-pointer block">Logout</a>
+                </li>
+      
+                <!-- Show Login and Inscription options if not logged in -->
+                <li *ngIf="!isLoggedIn" class="px-4 py-2 hover:bg-gray-100">
+                  <a routerLink="/login-customer" class="font-bold w-full block">Login</a>
+                </li>
+                <li *ngIf="!isLoggedIn" class="px-4 py-2 hover:bg-gray-100">
+                  <a routerLink="/register" class="font-bold w-full block">Inscription</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+      
+          <!-- Wishlist Icon -->
+          <a routerLink="/wishlist" class="text-black hover:text-gray-500">
+            <i class="fas fa-heart text-xl"></i>
+          </a>
+      
+          <!-- Cart Icon -->
+          <a routerLink="/cart" class="text-black hover:text-gray-500">
+            <i class="fas fa-shopping-cart text-xl"></i>
+          </a>
+        </div>
+      
+        <!-- Mobile Burger Menu -->
+        <div class="lg:hidden">
+          <button (click)="toggleMenu()" class="text-black">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="isMobileMenuOpen" class=" container mx-auto lg:hidden bg-white text-black px-4 py-4  z-50 absolute top-12 ">
+        <ul class="space-y-4">
+          <a routerLink="/" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Acceuil</a>
+          <a routerLink="/top-vente" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Top Vente</a>
+          <a routerLink="/promo" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Promo</a>
+          <a routerLink="/new-arriving" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Nouvel arrivage</a>
+          <a routerLink="/about" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">About</a>
+          
+          <!-- Updated li items for Wishlist, Cart, Login, Register, and Logout -->
+          <li>
+            <a routerLink="/wishlist" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Wishlist</a>
+          </li>
+          <li>
+            <a routerLink="/cart" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Cart</a>
+          </li>
+          <li *ngIf="!isLoggedIn">
+            <a routerLink="/login-customer" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Login</a>
+          </li>
+          <li *ngIf="!isLoggedIn">
+            <a routerLink="/register" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Inscription</a>
+          </li>
+          <li *ngIf="isLoggedIn" class="px-4 py-2 hover:bg-gray-100" (click)="logout()">
+            <span class="font-bold cursor-pointer">Logout</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+      
+      <!-- Mobile Menu (Dropdown) -->
+      
+      
   
     <!-- Main Content -->
-    <main class="flex-1 container mx-auto px-6 py-8">
+    <main class="flex-1">
       <router-outlet></router-outlet>
     </main>
   

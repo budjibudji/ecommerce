@@ -1,1 +1,45 @@
-<p>home works!</p>
+<div class="relative w-full h-[400px] overflow-hidden">
+    <!-- Slider Wrapper -->
+    <div class="h-full flex transition-transform duration-500" [ngStyle]="{ transform: 'translateX(-' + currentIndex * 100 + '%)' }">
+      <div *ngFor="let category of categories" 
+           class="flex-none w-full h-full bg-cover bg-center relative" 
+           [ngStyle]="{
+             backgroundImage: 'url(' + getImageUrl(category.cover_photo) + ')'
+           }">
+        
+        <!-- Background Overlay -->
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        
+        <!-- Content (flex column, center items) -->
+        <div class="absolute inset-0 flex flex-col justify-center items-center text-white p-8 pr-12">
+          <!-- Title -->
+          <h2 class="text-4xl font-bold mb-4 text-center">{{ category.name }}</h2>
+          
+          <!-- Image with Border -->
+          <img *ngIf="category.image" 
+               [src]="'http://localhost:8000/storage/' + category.image" 
+               alt="{{ category.name }}" 
+               class="w-36 h-36 object-cover mb-4 border-2 border-white hover:border-green-700 transition-all">
+  
+          <!-- Description -->
+          <p class="text-lg mb-6 text-center max-w-[800px]">{{ category.description | slice:0:150 }}...</p>
+          
+          <!-- Button -->
+          <button (click)="goToCategory(category.id)" class="bg-green-700 hover:bg-green-800 text-white py-2 px-6 rounded-lg">
+            Discover
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Navigation Arrows with Updated Style -->
+    <button (click)="currentIndex = (currentIndex - 1 + categories.length) % categories.length" 
+            class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-green-800 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-all">
+      &lt;
+    </button>
+    <button (click)="currentIndex = (currentIndex + 1) % categories.length" 
+            class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-green-800 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-all">
+      &gt;
+    </button>
+  </div>
+  
