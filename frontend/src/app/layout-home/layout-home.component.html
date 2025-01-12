@@ -1,0 +1,46 @@
+<div class="min-h-screen flex flex-col bg-white">
+    <!-- Header -->
+    <header class="bg-green-700 text-white  ">
+      <div class="container mx-auto flex justify-between items-center px-6 py-2">
+        
+        <!-- Left: Contact Email with Mail Icon -->
+        <div class="flex items-center space-x-2">
+          <!-- Mail Icon -->
+          <i class="fas fa-envelope text-white"></i>
+          <a href="mailto:contact@example.com" class="text-white font-extrabold hover:text-gray-200">contact&#64;example.com</a>
+        </div>
+  
+        <!-- Right: Social Icons (Facebook and Instagram) -->
+        <div class="flex items-center space-x-4">
+          <!-- Facebook Icon -->
+          <a href="https://facebook.com" target="_blank" class="bg-white text-green-700 rounded-full flex items-center justify-center p-4 h-2 w-4 hover:bg-gray-200">
+            <i class="fab fa-facebook-f"></i> <!-- FontAwesome Icon for Facebook -->
+          </a>
+          
+          <!-- Instagram Icon -->
+          <a href="https://instagram.com" target="_blank" class="bg-white text-green-700 rounded-full flex items-center justify-center p-4 h-2 w-4 hover:bg-gray-200">
+            <i class="fab fa-instagram"></i> <!-- FontAwesome Icon for Instagram -->
+          </a>
+        </div>
+      </div>
+      <section class="bg-white w-full py-2 border-b border-gray-200">
+        <div class="container mx-auto flex items-center justify-start px-6">
+          <!-- Logo on the left -->
+          <img src="assets/images/logo.png" alt="Logo" class="h-12 w-auto">
+        </div>
+      </section>
+    </header>
+  
+    <!-- Main Content -->
+    <main class="flex-1 container mx-auto px-6 py-8">
+      <router-outlet></router-outlet>
+    </main>
+  
+    <!-- Footer -->
+    <footer class="bg-black text-white py-6">
+      <div class="container mx-auto text-center">
+        <p>&copy; 2025 My Angular App. All Rights Reserved.</p>
+      </div>
+    </footer>
+  </div>
+  

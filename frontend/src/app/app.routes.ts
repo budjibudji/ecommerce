@@ -13,8 +13,20 @@ import { categoryEditComponent } from './category-edit/category-edit.component';
 import { PurchasesListComponent } from './purchases-list/purchases-list.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
+import { LayoutHomeComponent } from './layout-home/layout-home.component';
+import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
+  {
+    path: '',
+    component: LayoutHomeComponent,
+    children: [
+      {
+        path: '',
+        component: HomeComponent,
+      },
+    ],
+  },
   {
     path: 'admin',
     component: LayoutComponent,
