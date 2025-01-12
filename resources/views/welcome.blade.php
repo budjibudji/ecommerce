@@ -7,6 +7,8 @@
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
     <style>
         *,
         :before,
@@ -101,7 +103,7 @@
 
 <body>
     <app-root></app-root>
-    <link rel="modulepreload" href="frontend/browser/chunk-SZAMMJ45.js">
+    <link rel="frontend/browser/modulepreload" href="frontend/browser/chunk-GDTLNTW6.js">
     <script src="frontend/browser/polyfills.js" type="module"></script>
     <script src="frontend/browser/main.js" type="module"></script>
 </body>
