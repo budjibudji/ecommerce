@@ -24,10 +24,27 @@ class WishlistController
 
         return response()->json($wishlistItems);
     }
+    /**
+     * Get Whislt by productId.
+     *
+     * @param  int  $productId
+     * @return \Illuminate\Http\Response
+     */
+    public function show($productId)
+    {
+        $user = JWTAuth::parseToken()->authenticate();;
+
+        $existingWishlistItem = Wishlist::where('user_id', $user->id)
+            ->where('product_id', $productId)
+            ->first();
+        if ($existingWishlistItem) return response()->json(true);
+        return response()->json(false);
+    }
 
     /**
      * Store a newly added product to the user's wishlist.
      */
+
     public function store(Request $request)
     {
         // Validate incoming request
@@ -63,17 +80,26 @@ class WishlistController
     /**
      * Remove a product from the user's wishlist.
      */
-    public function destroy($id)
+    /**
+     * Get Whislt by productId.
+     *
+     * @param  int  $productId
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($productId)
     {
         // Find the wishlist item
-        $wishlistItem = Wishlist::find($id);
+        $user = JWTAuth::parseToken()->authenticate();;
 
-        if (!$wishlistItem) {
+        $existingWishlistItem = Wishlist::where('user_id', $user->id)
+            ->where('product_id', $productId)
+            ->first();
+        if (!$existingWishlistItem) {
             return response()->json(['message' => 'Wishlist item not found'], 404);
         }
 
         // Delete the wishlist item
-        $wishlistItem->delete();
+        $existingWishlistItem->delete();
 
         return response()->json(['message' => 'Wishlist item removed successfully']);
     }

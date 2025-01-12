@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
   private apiUrl = 'http://localhost:8000/api/products'; // Update with your backend API URL
+  private apiCartsUrl = 'http://localhost:8000/api/carts'; // Update with your backend API URL
+  private apiWishlistsUrl = 'http://localhost:8000/api/wishlists'; // Update with your backend API URL
 
   constructor(private http: HttpClient) {}
 
@@ -16,6 +18,40 @@ export class ProductService {
     return this.http.get<any[]>(`${this.apiUrl}`);
   }
 
+  getNewArrivals(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/new`);
+  }
+
+  addToCart(product_id: number, quantity: number): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiCartsUrl}`, {
+      product_id,
+      quantity,
+    });
+  }
+  addToWishlist(product_id: number): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiWishlistsUrl}`, {
+      product_id,
+    });
+  }
+
+  likedWishlistitem(product_id: number): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.apiWishlistsUrl}/product/${product_id}`
+    );
+  }
+  removeFromCart(id: number): Observable<any[]> {
+    return this.http.delete<any[]>(`${this.apiCartsUrl}/${id}`);
+  }
+  removeFromWishlist(id: number): Observable<any[]> {
+    return this.http.delete<any[]>(`${this.apiWishlistsUrl}/product/${id}`);
+  }
+  getTopSelling(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/top-selling`);
+  }
+
+  getPromo(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/promo`);
+  }
   // Get a single product by ID
   getProduct(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);

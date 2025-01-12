@@ -51,12 +51,13 @@ Route::middleware([JwtAuthMiddleware::class])->group(function () {
     // Remove product from cart
     Route::delete('carts/{id}', [CartController::class, 'destroy']);
     Route::get('wishlists', [WishlistController::class, 'index']);
+    Route::get('wishlists/product/{productId}', [WishlistController::class, 'show']);
 
     // Add product to wishlist
     Route::post('wishlists', [WishlistController::class, 'store']);
 
     // Remove product from wishlist
-    Route::delete('wishlists/{id}', [WishlistController::class, 'destroy']);
+    Route::delete('wishlists/product/{id}', [WishlistController::class, 'destroy']);
     Route::middleware([AdminMiddleware::class])->group(function () {
 
 

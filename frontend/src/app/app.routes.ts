@@ -15,6 +15,9 @@ import { LayoutComponent } from './layout/layout.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { LayoutHomeComponent } from './layout-home/layout-home.component';
 import { HomeComponent } from './home/home.component';
+import { NewArrivingComponent } from './new-arriving/new-arriving.component';
+import { PromosComponent } from './promos/promos.component';
+import { TopSellingComponent } from './top-selling/top-selling.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +27,18 @@ export const routes: Routes = [
       {
         path: '',
         component: HomeComponent,
+      },
+      {
+        path: 'new-arriving',
+        component: NewArrivingComponent,
+      },
+      {
+        path: 'promotions',
+        component: PromosComponent,
+      },
+      {
+        path: 'top-vente',
+        component: TopSellingComponent,
       },
     ],
   },
