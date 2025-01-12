@@ -9,6 +9,8 @@
       <thead class="bg-green-700 text-white">
         <tr>
           <th class="py-2 px-4 text-left">Name</th>
+          <th class="py-2 px-4 text-left">Description</th>
+          <th class="py-2 px-4 text-left">Cover</th>
           <th class="py-2 px-4 text-left">Image</th> <!-- New column for Image -->
           <th class="py-2 px-4 text-left">Actions</th>
         </tr>
@@ -16,6 +18,12 @@
       <tbody>
         <tr *ngFor="let category of categories">
           <td class="border-t px-4 py-2">{{ category.name }}</td>
+          <td class="border-t px-4 py-2">{{ category.description }}</td>
+
+          <td class="border-t px-4 py-2">
+            <!-- Image column with a small thumbnail -->
+            <img *ngIf="category.cover_photo" [src]="'http://localhost:8000/storage/' + category.cover_photo" alt="{{ category.name }}" class="w-16 h-16 object-cover rounded">
+          </td>
           <td class="border-t px-4 py-2">
             <!-- Image column with a small thumbnail -->
             <img *ngIf="category.image" [src]="'http://localhost:8000/storage/' + category.image" alt="{{ category.name }}" class="w-16 h-16 object-cover rounded">

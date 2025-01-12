@@ -18,7 +18,10 @@ class Category extends Model
         'name',
         'slug',
         'image',
-        'is_deleted'
+        'is_deleted',
+        'cover_photo',
+        'description',
+
     ];
 
     /**

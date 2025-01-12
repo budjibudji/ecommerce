@@ -14,9 +14,12 @@ export class categoryCreateComponent implements OnInit {
   category = {
     name: '',
     image: null, // This will store the file object
+    cover_photo: null,
+    description: '',
   };
   categories: any[] = [];
   imagePreview: string | null = null; // Property for image preview
+  imageCoverPreview: string | null = null; // Property for image preview
 
   constructor(
     private categoryService: CategoryService,
@@ -38,15 +41,31 @@ export class categoryCreateComponent implements OnInit {
     }
   }
 
+  onCoverImageChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.category.cover_photo = file; // Store the file object in category object
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageCoverPreview = reader.result as string; // Set the image preview as base64 URL
+      };
+      reader.readAsDataURL(file); // Convert the file to base64 string
+    }
+  }
   // Submit the form
   onSubmit() {
     const formData = new FormData();
 
     // Append category data to FormData
     formData.append('name', this.category.name);
+    formData.append('description', this.category.description);
+
     // Append image file if selected
     if (this.category.image) {
       formData.append('image', this.category.image);
+    }
+    if (this.category.cover_photo) {
+      formData.append('cover_photo', this.category.cover_photo);
     }
 
     // Send the FormData to the backend

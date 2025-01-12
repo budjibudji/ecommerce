@@ -14,9 +14,13 @@ export class categoryEditComponent implements OnInit {
   category = {
     name: '',
     image: null, // This will store the file object
+    cover_photo: null,
+    description: '',
   };
+
   categories: any[] = [];
   imagePreview: string | null = null; // Property for image preview
+  imageCoverPreview: string | null = null; // Property for image preview
 
   constructor(
     private categoryService: CategoryService,
@@ -30,6 +34,23 @@ export class categoryEditComponent implements OnInit {
       this.categoryService.getCategoryById(Number(catgoryId)).subscribe(
         (data) => {
           this.category = data;
+          if (data.cover_photo) {
+            fetch(`http://localhost:8000/storage/${data.cover_photo}`)
+              .then((response) => response.blob()) // Convert the response to a Blob
+              .then((blob) => {
+                const file = new File([blob], 'image', { type: blob.type });
+
+                // Now `file` is a File object, which you can upload or use
+                //@ts-ignore
+                this.category.cover_photo = file;
+
+                // For example, you can display the image preview in an <img> element
+                this.imageCoverPreview = URL.createObjectURL(file);
+              })
+              .catch((error) => {
+                console.error('Error fetching image:', error);
+              });
+          }
           if (data.image) {
             fetch(`http://localhost:8000/storage/${data.image}`)
               .then((response) => response.blob()) // Convert the response to a Blob
@@ -60,6 +81,17 @@ export class categoryEditComponent implements OnInit {
   }
 
   // Handle the image change and preview
+  onCoverImageChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.category.cover_photo = file; // Store the file object in category object
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageCoverPreview = reader.result as string; // Set the image preview as base64 URL
+      };
+      reader.readAsDataURL(file); // Convert the file to base64 string
+    }
+  }
   onImageChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
@@ -78,6 +110,11 @@ export class categoryEditComponent implements OnInit {
 
     // Append category data to FormData
     formData.append('name', this.category.name);
+    formData.append('description', this.category.description);
+
+    if (this.category.cover_photo) {
+      formData.append('cover_photo', this.category.cover_photo);
+    }
     // Append image file if selected
     if (this.category.image) {
       formData.append('image', this.category.image);

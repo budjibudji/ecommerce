@@ -36,18 +36,26 @@ class CategoryController
         $request->validate([
             'name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
+            'description' => 'nullable|string',
+            'cover_photo' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
         ]);
 
         // Handle image upload
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('categories', 'public');
         }
+        if ($request->hasFile('cover_photo')) {
+            $imagePathCover = $request->file('cover_photo')->store('categories', 'public');
+        }
+
 
         // Create the category
         $category = Category::create([
             'name' => $request->name,
+            'description' => $request->description,
             'slug' => Str::slug($request->name), // Automatically generate slug from name
             'image' => isset($imagePath) ? $imagePath : null,
+            'cover_photo' => isset($imagePathCover) ? $imagePathCover : null
         ]);
 
         return response()->json($category, 201); // Return created category
@@ -82,6 +90,10 @@ class CategoryController
         $request->validate([
             'name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
+            'description' => 'nullable|string',
+            'cover_photo' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
+
+
         ]);
 
         // Handle image upload if exists
@@ -95,9 +107,21 @@ class CategoryController
             $imagePath = $request->file('image')->store('categories', 'public');
             $category->image = $imagePath;
         }
+        if ($request->hasFile('cover_photo')) {
+            // Delete old image if exists
+            if ($category->cover_photo && Storage::exists('public/' . $category->cover_photo)) {
+                Storage::delete('public/' . $category->cover_photo);
+            }
+
+            // Store new image
+            $imagePathCover = $request->file('cover_photo')->store('categories', 'public');
+            $category->cover_photo = $imagePathCover;
+        }
 
         // Update category details
         $category->name = $request->name;
+        $category->description = $request->description;
+
         $category->slug = Str::slug($request->name);
         $category->save();
 
