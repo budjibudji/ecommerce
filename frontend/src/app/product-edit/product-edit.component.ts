@@ -18,7 +18,8 @@ export class ProductEditComponent implements OnInit {
     price: 0,
     category_id: '',
     stock: 0,
-    image: null, // This will store the file object
+    image: null, // This will store the file object,
+    promo_price: undefined,
   };
   categories: any[] = [];
   imagePreview: string | null = null; // Property for image preview
@@ -88,6 +89,9 @@ export class ProductEditComponent implements OnInit {
     formData.append('price', this.product.price.toString());
     formData.append('category_id', this.product.category_id.toString());
     formData.append('stock', this.product.stock.toString());
+    if (this.product.promo_price) {
+      formData.append('promo_price', this.product.promo_price);
+    }
 
     // Append image file if selected
     if (this.product.image) {

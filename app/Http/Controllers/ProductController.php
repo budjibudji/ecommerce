@@ -15,7 +15,37 @@ class ProductController
         $products = Product::with('category')->where('is_deleted', 0)->get(); // Eager load category
         return response()->json($products);
     }
+    public function newArrivage()
+    {
+        $products = Product::with('category')->where('is_deleted', 0)->orderBy('created_at', 'desc')  // Order by created_at in descending order
+            ->get(); // Eager load category
+        return response()->json($products);
+    }
 
+    public function topSelling()
+    {
+
+        $products = Product::with('category')->where('is_deleted', 0)
+            ->select('products.*')
+            ->join('purchases', 'products.id', '=', 'purchases.product_id')
+            ->groupBy('products.id')
+            ->orderByRaw('SUM(purchases.quantity) DESC') // Order by the total quantity sold
+            ->havingRaw('SUM(purchases.quantity) > 0') // Make sure it's a sold product
+            ->get();
+
+
+        return response()->json($products);
+    }
+
+
+
+
+    public function promo()
+    {
+        $products = Product::with('category')->where('is_deleted', 0)->whereNotNull('promo_price')
+            ->get(); // Eager load category
+        return response()->json($products);
+    }
     // Store a newly created product in storage.
     public function store(Request $request)
     {
@@ -24,6 +54,7 @@ class ProductController
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric',
+            'promo_price' => 'nullable|numeric',
             'stock' => 'required|integer',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
             'category_id' => 'required|exists:categories,id',
@@ -41,6 +72,7 @@ class ProductController
             'slug' => \Illuminate\Support\Str::slug($request->name),
             'description' => $request->description,
             'price' => $request->price,
+            'promo_price' => $request->promo_price,
             'stock' => $request->stock,
             'image' => isset($imagePath) ? $imagePath : null,
             'category_id' => $request->category_id,
@@ -67,6 +99,7 @@ class ProductController
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric',
+            'promo_price' => 'nullable|numeric',
             'stock' => 'required|integer',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
             'category_id' => 'required|exists:categories,id',
@@ -92,6 +125,7 @@ class ProductController
             'slug' => \Illuminate\Support\Str::slug($request->name),
             'description' => $request->description,
             'price' => $request->price,
+            'promo_price' => $request->promo_price,
             'stock' => $request->stock,
             'category_id' => $request->category_id,
             'rating' => $request->rating,

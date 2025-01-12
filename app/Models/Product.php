@@ -18,7 +18,8 @@ class Product extends Model
         'image',
         'category_id',
         'is_featured',
-        'is_deleted'
+        'is_deleted',
+        'promo_price'
     ];
 
     public function category()

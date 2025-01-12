@@ -21,6 +21,12 @@ Route::post('admin/login', [UserAuthController::class, 'adminlogin']);
 Route::get('categories', [CategoryController::class, 'index']);         // Get all categories
 Route::get('categories/{category}', [CategoryController::class, 'show']); // Get single category
 Route::get('products', [ProductController::class, 'index']);         // Get all products
+Route::get('products/promo', [ProductController::class, 'promo']);
+Route::get('products/top-selling', [ProductController::class, 'topSelling']);         // Get all products
+// Get all products
+Route::get('products/new', [ProductController::class, 'newArrivage']);         // Get all products
+
+
 Route::get('products/{product}', [ProductController::class, 'show']); // Get a single product
 Route::get('products/category/{categoryId}', [ProductController::class, 'getByCategory']);
 

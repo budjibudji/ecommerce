@@ -25,9 +25,9 @@ class PurchaseController
         }
 
         if ($user->is_admin) {
-            $purchase = PurchaseRecap::with(['purchases', 'user'])->get();
+            $purchase = PurchaseRecap::with(['purchases', 'user'])->orderBy('created_at', 'desc')->get();
         } else {
-            $purchase = PurchaseRecap::with(['purchases', 'user'])->where('user_id', $user->id)->get();
+            $purchase = PurchaseRecap::with(['purchases', 'user'])->where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
         }
 
         return response()->json($purchase);
