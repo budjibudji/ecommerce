@@ -25,10 +25,14 @@ export class CartComponent implements OnInit {
   }
   loadItems() {
     this.productService.getCart().subscribe((data) => {
-      this.cartitems = data.filter(({ product }) => product.stock > 0);
-      this.outOfstock = data.filter(({ product }) => (product.stock = 0));
-      this.exeededstock = data.filter(({ product,quantity }) => (product.stock > 0 && product.stock<quantity));
-
+      this.cartitems = data.filter(
+        ({ product, quantity }) =>
+          product.stock > 0 && quantity <= product.stock
+      );
+      this.exeededstock = data.filter(
+        ({ product, quantity }) => product.stock > 0 && product.stock < quantity
+      );
+      this.outOfstock = data.filter(({ product }) => product.stock === 0);
     });
   }
   onSelectionChange(item: any): void {
