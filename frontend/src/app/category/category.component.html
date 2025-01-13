@@ -1,11 +1,46 @@
+<div class="relative w-full h-[500px] overflow-hidden">
+    <!-- Slider Wrapper -->
+    <div class="h-full flex " >
+      <div  
+           class="flex-none w-full h-full bg-cover bg-center relative" 
+           [ngStyle]="{
+             backgroundImage: 'url(' + getImageUrl(category.cover_photo) + ')'
+           }">
+        
+        <!-- Background Overlay -->
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        
+        <!-- Content (flex column, center items) -->
+        <div class="absolute inset-0 flex flex-col justify-center items-center text-white p-8 pr-12">
+          <!-- Title -->
+          <h2 class="text-4xl font-bold mb-4 text-center">{{ category.name }}</h2>
+          
+          <!-- Image with Border -->
+          <img *ngIf="category.image" 
+               [src]="'http://localhost:8000/storage/' + category.image" 
+               alt="{{ category.name }}" 
+               class="rounded-lg w-36 h-36 object-cover mb-4 border-2 border-white hover:border-green-700 transition-all">
+  
+          <!-- Description -->
+          <p class="text-lg mb-6 text-center max-w-[800px]">{{ category.description  }}</p>
+          
+         
+        </div>
+      </div>
+    </div>
+    
 
-<!-- promo -->
+  </div>
+  
+
+
+<!-- new arrivage -->
 <div class="container mx-auto px-4 py-8">
-    <h2 class="text-2xl font-bold mb-6 text-center">Promotions</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center">Liste des produits</h2>
     
     <!-- New Arrivals Section -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-      <div *ngFor="let product of promos" class="bg-green-200 rounded-lg shadow-md overflow-hidden w-full max-w-xs">
+      <div *ngFor="let product of category.products" class="bg-green-200 rounded-lg shadow-md overflow-hidden w-full max-w-xs">
         <img [src]="'http://localhost:8000/storage/' + product.image" 
              alt="{{ product.name }}" class="w-full h-48 object-cover">
     
@@ -53,9 +88,11 @@
       </div>
     </div>
     
+
   </div>
   <app-custom-alert
   *ngIf="showAlert"
   (choice)="handleChoice($event)"
 ></app-custom-alert>
   
+

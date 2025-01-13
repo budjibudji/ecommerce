@@ -39,6 +39,9 @@ export class ProductService {
       `${this.apiWishlistsUrl}/product/${product_id}`
     );
   }
+  getWishlist(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiWishlistsUrl}`);
+  }
   removeFromCart(id: number): Observable<any[]> {
     return this.http.delete<any[]>(`${this.apiCartsUrl}/${id}`);
   }

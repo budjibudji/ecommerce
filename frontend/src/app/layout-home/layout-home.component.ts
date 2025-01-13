@@ -2,10 +2,11 @@ import { Component, HostListener } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CategoryService } from '../category.service';
 import { CommonModule } from '@angular/common';
+import { CustomAlertComponent } from '../custom-alert/custom-alert.component';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, CustomAlertComponent],
   templateUrl: './layout-home.component.html',
   styleUrl: './layout-home.component.css',
 })
@@ -15,6 +16,7 @@ export class LayoutHomeComponent {
   isProfileDropdownOpen: boolean = false;
 
   categories: any[] = []; // Define the categories array
+  showAlert: boolean = false;
 
   constructor(
     private categoryService: CategoryService,
@@ -50,6 +52,20 @@ export class LayoutHomeComponent {
   get isLoggedIn(): boolean {
     return !!localStorage.getItem('token'); // Replace 'authToken' with the actual key for your token
   }
+  wishlist() {
+    if (!localStorage.getItem('token')) {
+      this.showAlert = true;
+      return;
+    }
+    this.router.navigate(['/wishlist']);
+  }
+  cart() {
+    if (!localStorage.getItem('token')) {
+      this.showAlert = true;
+      return;
+    }
+    this.router.navigate(['/cart']);
+  }
   toggleProfileDropdown() {
     this.isProfileDropdownOpen = !this.isProfileDropdownOpen;
   }
@@ -64,5 +80,11 @@ export class LayoutHomeComponent {
 
     // Redirect to login page
     this.router.navigate(['/login-customer']); // Adjust the path to your actual login route
+  }
+
+  handleChoice(choice: string) {
+    if (choice === 'cancel') {
+      this.showAlert = false;
+    }
   }
 }

@@ -18,6 +18,10 @@ import { HomeComponent } from './home/home.component';
 import { NewArrivingComponent } from './new-arriving/new-arriving.component';
 import { PromosComponent } from './promos/promos.component';
 import { TopSellingComponent } from './top-selling/top-selling.component';
+import { CategoryComponent } from './category/category.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { CustomerTokenGuard } from './auth/customer.guard';
+import { RegisterCustomerComponent } from './register-customer/register-customer.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +43,15 @@ export const routes: Routes = [
       {
         path: 'top-vente',
         component: TopSellingComponent,
+      },
+      {
+        path: 'category/:id',
+        component: CategoryComponent,
+      },
+      {
+        path: 'wishlist',
+        component: WishlistComponent,
+        canActivate: [CustomerTokenGuard],
       },
     ],
   },
@@ -81,6 +94,11 @@ export const routes: Routes = [
   {
     path: 'login-customer',
     component: LoginCustomerComponent,
+    canActivate: [TokenGuard], // Appliquer le guard ici
+  },
+  {
+    path: 'register',
+    component: RegisterCustomerComponent,
     canActivate: [TokenGuard], // Appliquer le guard ici
   },
   {

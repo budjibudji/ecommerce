@@ -5,7 +5,7 @@
         <!-- Left: Contact Email with Mail Icon -->
         <div class="flex items-center space-x-2">
           <i class="fas fa-envelope text-white"></i>
-          <a href="mailto:contact@example.com" class="text-white font-extrabold hover:text-gray-200">contact&#64;example.com</a>
+          <a href="mailto:day3ati@gmail.com" class="text-white font-extrabold hover:text-gray-200">day3ati&#64;gmail.com</a>
         </div>
   
         <!-- Right: Social Icons (Facebook and Instagram) -->
@@ -90,14 +90,18 @@
           </div>
       
           <!-- Wishlist Icon -->
-          <a routerLink="/wishlist" class="text-black hover:text-gray-500">
+          <button class="flex items-center text-black font-bold" (click)="wishlist()">
             <i class="fas fa-heart text-xl"></i>
-          </a>
-      
+        </button>
+          
           <!-- Cart Icon -->
-          <a routerLink="/cart" class="text-black hover:text-gray-500">
+         
+          <button class="flex items-center text-black font-bold" (click)="cart()">
             <i class="fas fa-shopping-cart text-xl"></i>
-          </a>
+        </button>
+          
+
+
         </div>
       
         <!-- Mobile Burger Menu -->
@@ -116,11 +120,12 @@
           <a routerLink="/about" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">About</a>
           
           <!-- Updated li items for Wishlist, Cart, Login, Register, and Logout -->
-          <li>
-            <a routerLink="/wishlist" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Wishlist</a>
+         
+          <li  class="px-4 py-2 hover:bg-gray-100" (click)="cart()">
+            <span class="font-bold cursor-pointer">Cart</span>
           </li>
-          <li>
-            <a routerLink="/cart" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Cart</a>
+          <li  class="px-4 py-2 hover:bg-gray-100" (click)="wishlist()">
+            <span class="font-bold cursor-pointer">Wishlist</span>
           </li>
           <li *ngIf="!isLoggedIn">
             <a routerLink="/login-customer" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Login</a>
@@ -152,3 +157,7 @@
     </footer>
   </div>
   
+  <app-custom-alert
+  *ngIf="showAlert"
+  (choice)="handleChoice($event)"
+></app-custom-alert>

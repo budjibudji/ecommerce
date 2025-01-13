@@ -4,16 +4,18 @@ import { CategoryService } from '../category.service'; // Adjust path as necessa
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../product.service';
 import { FormsModule } from '@angular/forms';
+import { CustomAlertComponent } from '../custom-alert/custom-alert.component';
 
 @Component({
   selector: 'app-promos',
   templateUrl: './promos.component.html',
   styleUrls: ['./promos.component.css'],
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, CustomAlertComponent],
 })
 export class PromosComponent implements OnInit {
   promos: any[] = []; // Store the categories
   likedItems: any[] = [];
+  showAlert: boolean = false;
 
   constructor(
     private categoryService: CategoryService,
@@ -25,7 +27,11 @@ export class PromosComponent implements OnInit {
   ngOnInit(): void {
     this.loadPromo();
   }
-
+  handleChoice(choice: string) {
+    if (choice === 'cancel') {
+      this.showAlert = false;
+    }
+  }
   loadPromo() {
     this.productService.getPromo().subscribe(
       (data) => {
@@ -57,8 +63,10 @@ export class PromosComponent implements OnInit {
 
   // Optionally handle add to cart or wishlist actions
   addToCart(productId: number, quantity: number): any {
-    if (!localStorage.getItem('token'))
-      return this.router.navigate(['/login-customer']);
+    if (!localStorage.getItem('token')) {
+      this.showAlert = true;
+      return;
+    }
 
     this.productService.addToCart(productId, quantity).subscribe(
       () => {
@@ -101,8 +109,10 @@ export class PromosComponent implements OnInit {
     );
   }
   toggleWishlist(productId: number): any {
-    if (!localStorage.getItem('token'))
-      return this.router.navigate(['/login-customer']);
+    if (!localStorage.getItem('token')) {
+      this.showAlert = true;
+      return;
+    }
 
     if (this.likedItems.includes(productId))
       return this.removeFromWishlist(productId);

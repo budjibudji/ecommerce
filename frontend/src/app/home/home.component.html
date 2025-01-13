@@ -227,3 +227,7 @@
       </div>
   </div>
   
+  <app-custom-alert
+    *ngIf="showAlert"
+    (choice)="handleChoice($event)"
+  ></app-custom-alert>

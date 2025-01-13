@@ -4,16 +4,18 @@ import { CategoryService } from '../category.service'; // Adjust path as necessa
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../product.service';
 import { FormsModule } from '@angular/forms';
+import { CustomAlertComponent } from '../custom-alert/custom-alert.component';
 
 @Component({
   selector: 'app-top-selling',
   templateUrl: './top-selling.component.html',
   styleUrls: ['./top-selling.component.css'],
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, CustomAlertComponent],
 })
 export class TopSellingComponent implements OnInit {
   topSellings: any[] = []; // Store the categories
   likedItems: any[] = [];
+  showAlert: boolean = false;
 
   constructor(
     private productService: ProductService,
@@ -24,7 +26,11 @@ export class TopSellingComponent implements OnInit {
   ngOnInit(): void {
     this.loadTopSeeling();
   }
-
+  handleChoice(choice: string) {
+    if (choice === 'cancel') {
+      this.showAlert = false;
+    }
+  }
   loadTopSeeling() {
     this.productService.getTopSelling().subscribe(
       (data) => {
@@ -56,8 +62,10 @@ export class TopSellingComponent implements OnInit {
 
   // Optionally handle add to cart or wishlist actions
   addToCart(productId: number, quantity: number): any {
-    if (!localStorage.getItem('token'))
-      return this.router.navigate(['/login-customer']);
+    if (!localStorage.getItem('token')) {
+      this.showAlert = true;
+      return;
+    }
 
     this.productService.addToCart(productId, quantity).subscribe(
       () => {
@@ -100,8 +108,10 @@ export class TopSellingComponent implements OnInit {
     );
   }
   toggleWishlist(productId: number): any {
-    if (!localStorage.getItem('token'))
-      return this.router.navigate(['/login-customer']);
+    if (!localStorage.getItem('token')) {
+      this.showAlert = true;
+      return;
+    }
 
     if (this.likedItems.includes(productId))
       return this.removeFromWishlist(productId);

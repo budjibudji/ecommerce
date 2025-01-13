@@ -33,7 +33,12 @@ class UserAuthController
             'password' => bcrypt($request->password), // Hash the password before storing it
         ]);
 
-        return response()->json(['message' => 'User created successfully'], 201);
+        $customClaims = ['exp' => strtotime('+100 years')];
+
+        $token = JWTAuth::claims($customClaims)->fromUser($user);
+
+        // Return the token
+        return response()->json(['token' => $token], 200);
     }
 
     public function login(Request $request)

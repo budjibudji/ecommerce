@@ -4,16 +4,18 @@ import { CategoryService } from '../category.service'; // Adjust path as necessa
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../product.service';
 import { FormsModule } from '@angular/forms';
+import { CustomAlertComponent } from '../custom-alert/custom-alert.component';
 
 @Component({
   selector: 'app-new-arriving',
   templateUrl: './new-arriving.component.html',
   styleUrls: ['./new-arriving.component.css'],
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, CustomAlertComponent],
 })
 export class NewArrivingComponent implements OnInit {
   newArrivals: any[] = []; // Store the categories
   likedItems: any[] = [];
+  showAlert: boolean = false;
 
   constructor(
     private productService: ProductService,
@@ -24,7 +26,11 @@ export class NewArrivingComponent implements OnInit {
   ngOnInit(): void {
     this.loadNewArrivals();
   }
-
+  handleChoice(choice: string) {
+    if (choice === 'cancel') {
+      this.showAlert = false;
+    }
+  }
   loadNewArrivals() {
     this.productService.getNewArrivals().subscribe(
       (data) => {
@@ -55,8 +61,10 @@ export class NewArrivingComponent implements OnInit {
 
   // Optionally handle add to cart or wishlist actions
   addToCart(productId: number, quantity: number): any {
-    if (!localStorage.getItem('token'))
-      return this.router.navigate(['/login-customer']);
+    if (!localStorage.getItem('token')) {
+      this.showAlert = true;
+      return;
+    }
 
     this.productService.addToCart(productId, quantity).subscribe(
       () => {
@@ -99,8 +107,10 @@ export class NewArrivingComponent implements OnInit {
     );
   }
   toggleWishlist(productId: number): any {
-    if (!localStorage.getItem('token'))
-      return this.router.navigate(['/login-customer']);
+    if (!localStorage.getItem('token')) {
+      this.showAlert = true;
+      return;
+    }
 
     if (this.likedItems.includes(productId))
       return this.removeFromWishlist(productId);

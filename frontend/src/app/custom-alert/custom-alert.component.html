@@ -1,0 +1,32 @@
+<!-- Modal Overlay -->
+<div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50" (click)="onChoice('cancel')">
+    <!-- Modal Container -->
+    <div class="bg-white rounded-lg shadow-lg p-6 w-96" (click)="$event.stopPropagation()">
+      <!-- Modal Header -->
+      <div class="text-center mb-4">
+        <h2 class="text-lg font-semibold text-gray-800">You are not connected</h2>
+      </div>
+      <!-- Modal Footer -->
+      <div class="flex justify-between mt-4">
+        <button
+          class="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-700"
+          (click)="onChoice('register')"
+        >
+          Register
+        </button>
+        <button
+          class="px-4 py-2 bg-red-500 text-white font-semibold rounded-md hover:bg-red-700"
+          (click)="onChoice('login')"
+        >
+          Login
+        </button>
+        <button
+          class="px-4 py-2 bg-gray-500 text-white font-semibold rounded-md hover:bg-gray-700"
+          (click)="onChoice('cancel')"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+  

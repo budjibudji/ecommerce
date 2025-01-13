@@ -17,7 +17,7 @@ export class CategoryService {
   }
 
   // Get a single category by its ID
-  getCategoryById(categoryId: number): Observable<any> {
+  getCategoryById(categoryId: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${categoryId}`);
   }
 

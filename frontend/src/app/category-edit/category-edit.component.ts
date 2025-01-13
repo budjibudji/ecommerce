@@ -31,7 +31,7 @@ export class categoryEditComponent implements OnInit {
   ngOnInit() {
     const catgoryId = this.route.snapshot.paramMap.get('id');
     if (catgoryId) {
-      this.categoryService.getCategoryById(Number(catgoryId)).subscribe(
+      this.categoryService.getCategoryById(catgoryId).subscribe(
         (data) => {
           this.category = data;
           if (data.cover_photo) {

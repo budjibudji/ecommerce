@@ -7,44 +7,35 @@ import { FormsModule } from '@angular/forms';
 import { CustomAlertComponent } from '../custom-alert/custom-alert.component';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-wishlist',
+  templateUrl: './wishlist.component.html',
+  styleUrls: ['./wishlist.component.css'],
   imports: [CommonModule, RouterModule, FormsModule, CustomAlertComponent],
 })
-export class HomeComponent implements OnInit {
-  categories: any[] = []; // Store the categories
-  newArrivals: any[] = []; // Store the categories
-  topSellings: any[] = []; // Store the categories
-  promos: any[] = []; // Store the categories
+export class WishlistComponent implements OnInit {
+  wishlists: any[] = []; // Store the categories
   likedItems: any[] = [];
   showAlert: boolean = false;
-  currentIndex: number = 0; // For the slider
 
   constructor(
-    private categoryService: CategoryService,
     private productService: ProductService,
 
     private router: Router
   ) {} // Inject Router
-
-  ngOnInit(): void {
-    this.loadCategories();
-    this.loadNewArrivals();
-    this.loadTopSeeling();
-    this.loadPromo();
-  }
   handleChoice(choice: string) {
     if (choice === 'cancel') {
       this.showAlert = false;
     }
   }
+  ngOnInit(): void {
+    this.loadWishlist();
+  }
 
-  loadPromo() {
-    this.productService.getPromo().subscribe(
+  loadWishlist() {
+    this.productService.getWishlist().subscribe(
       (data) => {
-        this.promos = data.slice(0, 4).map((product) => {
-          this.loadWishlist(product.id);
+        this.wishlists = data.map(({ product }) => {
+          this.loadLikedItem(product.id);
           return { ...product, quantity: 1 };
         });
       },
@@ -53,33 +44,8 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-  loadTopSeeling() {
-    this.productService.getTopSelling().subscribe(
-      (data) => {
-        this.topSellings = data.slice(0, 4).map((product) => {
-          this.loadWishlist(product.id);
-          return { ...product, quantity: 1 };
-        });
-      },
-      (error) => {
-        console.error('Error loading topSellings:', error);
-      }
-    );
-  }
-  loadNewArrivals() {
-    this.productService.getNewArrivals().subscribe(
-      (data) => {
-        this.newArrivals = data.slice(0, 4).map((product) => {
-          this.loadWishlist(product.id);
-          return { ...product, quantity: 1 };
-        });
-      },
-      (error) => {
-        console.error('Error loading newArrivals:', error);
-      }
-    );
-  }
-  loadWishlist(productid: number) {
+
+  loadLikedItem(productid: number) {
     this.productService.likedWishlistitem(productid).subscribe(
       (data: any): any => {
         console.log('ok');
@@ -92,38 +58,6 @@ export class HomeComponent implements OnInit {
         console.error('Error loading categories:', error);
       }
     );
-  }
-
-  loadCategories() {
-    this.categoryService.getCategories().subscribe(
-      (data) => {
-        this.categories = data;
-        this.startAutoScroll(); // Start auto-scrolling after categories are loaded
-      },
-      (error) => {
-        console.error('Error loading categories:', error);
-      }
-    );
-  }
-
-  startAutoScroll() {
-    setInterval(() => {
-      if (this.categories.length > 0) {
-        this.currentIndex = (this.currentIndex + 1) % this.categories.length;
-      }
-    }, 5000); // Change slide every 5 seconds
-  }
-
-  goToCategory(id: number) {
-    // Use Angular Router for navigation instead of window.location.href
-    this.router.navigate(['/category', id]); // This navigates to /category/:id
-  }
-  getImageUrl(coverPhoto: string): string {
-    // Return the full image URL, or a fallback if the image path is invalid
-    if (coverPhoto) {
-      return `http://localhost:8000/storage/${coverPhoto}`;
-    }
-    return 'http://localhost:8000/storage/default-image.jpg'; // Fallback image URL
   }
 
   // Optionally handle add to cart or wishlist actions
@@ -151,7 +85,7 @@ export class HomeComponent implements OnInit {
     this.productService.addToWishlist(productId).subscribe(
       () => {
         alert('Product added to wishlist');
-        this.loadWishlist(productId);
+        this.loadLikedItem(productId);
       },
       (error) => {
         console.error('Error adding item to wishlist', error);
@@ -165,7 +99,7 @@ export class HomeComponent implements OnInit {
     this.productService.removeFromWishlist(productId).subscribe(
       () => {
         alert('Product removed from wishlist');
-        this.loadWishlist(productId);
+        this.loadLikedItem(productId);
       },
       (error) => {
         console.error('Error adding item to wishlist', error);

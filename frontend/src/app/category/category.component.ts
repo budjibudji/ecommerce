@@ -1,84 +1,74 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router'; // Import the Router
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
+  Router,
+  RouterModule,
+  RouterStateSnapshot,
+} from '@angular/router'; // Import the Router
 import { CategoryService } from '../category.service'; // Adjust path as necessary
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../product.service';
 import { FormsModule } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { CustomAlertComponent } from '../custom-alert/custom-alert.component';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.css'],
   imports: [CommonModule, RouterModule, FormsModule, CustomAlertComponent],
 })
-export class HomeComponent implements OnInit {
-  categories: any[] = []; // Store the categories
-  newArrivals: any[] = []; // Store the categories
-  topSellings: any[] = []; // Store the categories
-  promos: any[] = []; // Store the categories
+export class CategoryComponent implements OnInit {
+  category = {
+    id: '',
+    cover_photo: '',
+    image: '',
+    name: '',
+    description: '',
+    products: [] as any[],
+  };
+
   likedItems: any[] = [];
   showAlert: boolean = false;
-  currentIndex: number = 0; // For the slider
 
   constructor(
     private categoryService: CategoryService,
     private productService: ProductService,
 
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {} // Inject Router
-
-  ngOnInit(): void {
-    this.loadCategories();
-    this.loadNewArrivals();
-    this.loadTopSeeling();
-    this.loadPromo();
-  }
   handleChoice(choice: string) {
     if (choice === 'cancel') {
       this.showAlert = false;
     }
   }
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((queryParams) => {
+      this.loadCategory();
+    });
+  }
 
-  loadPromo() {
-    this.productService.getPromo().subscribe(
-      (data) => {
-        this.promos = data.slice(0, 4).map((product) => {
-          this.loadWishlist(product.id);
-          return { ...product, quantity: 1 };
-        });
-      },
-      (error) => {
-        console.error('Error loading promo:', error);
-      }
-    );
+  loadCategory() {
+    this.categoryService
+      .getCategoryById(this.route.snapshot.paramMap.get('id') as string)
+      .subscribe(
+        (data) => {
+          this.category = {
+            ...data,
+            products: data.products.map((product: any) => {
+              this.loadWishlist(product.id);
+              return { ...product, quantity: 1 };
+            }),
+          };
+        },
+        (error) => {
+          console.error('Error loading promo:', error);
+        }
+      );
   }
-  loadTopSeeling() {
-    this.productService.getTopSelling().subscribe(
-      (data) => {
-        this.topSellings = data.slice(0, 4).map((product) => {
-          this.loadWishlist(product.id);
-          return { ...product, quantity: 1 };
-        });
-      },
-      (error) => {
-        console.error('Error loading topSellings:', error);
-      }
-    );
-  }
-  loadNewArrivals() {
-    this.productService.getNewArrivals().subscribe(
-      (data) => {
-        this.newArrivals = data.slice(0, 4).map((product) => {
-          this.loadWishlist(product.id);
-          return { ...product, quantity: 1 };
-        });
-      },
-      (error) => {
-        console.error('Error loading newArrivals:', error);
-      }
-    );
-  }
+
   loadWishlist(productid: number) {
     this.productService.likedWishlistitem(productid).subscribe(
       (data: any): any => {
@@ -92,38 +82,6 @@ export class HomeComponent implements OnInit {
         console.error('Error loading categories:', error);
       }
     );
-  }
-
-  loadCategories() {
-    this.categoryService.getCategories().subscribe(
-      (data) => {
-        this.categories = data;
-        this.startAutoScroll(); // Start auto-scrolling after categories are loaded
-      },
-      (error) => {
-        console.error('Error loading categories:', error);
-      }
-    );
-  }
-
-  startAutoScroll() {
-    setInterval(() => {
-      if (this.categories.length > 0) {
-        this.currentIndex = (this.currentIndex + 1) % this.categories.length;
-      }
-    }, 5000); // Change slide every 5 seconds
-  }
-
-  goToCategory(id: number) {
-    // Use Angular Router for navigation instead of window.location.href
-    this.router.navigate(['/category', id]); // This navigates to /category/:id
-  }
-  getImageUrl(coverPhoto: string): string {
-    // Return the full image URL, or a fallback if the image path is invalid
-    if (coverPhoto) {
-      return `http://localhost:8000/storage/${coverPhoto}`;
-    }
-    return 'http://localhost:8000/storage/default-image.jpg'; // Fallback image URL
   }
 
   // Optionally handle add to cart or wishlist actions
@@ -144,7 +102,13 @@ export class HomeComponent implements OnInit {
     );
     // Logic to add product to cart
   }
-
+  getImageUrl(coverPhoto: string): string {
+    // Return the full image URL, or a fallback if the image path is invalid
+    if (coverPhoto) {
+      return `http://localhost:8000/storage/${coverPhoto}`;
+    }
+    return 'http://localhost:8000/storage/default-image.jpg'; // Fallback image URL
+  }
   addToWishlist(productId: number): any {
     // Logic to add product to wishlist
 
