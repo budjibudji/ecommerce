@@ -1,0 +1,73 @@
+<div class=" mx-auto p-6 bg-[#d0f2d9]">
+    <!-- Product Title and Category -->
+    
+  
+    <div class="flex flex-col lg:flex-row">
+      <!-- Product Image -->
+      <div class="lg:w-1/2 mb-6 lg:mb-0 flex justify-center">
+        <!-- Responsive image with object-cover for aspect ratio -->
+        <img [src]="'http://localhost:8000/storage/' + product.image"
+             alt="{{ product.name }}"
+             class="bg-white w-full max-w-sm h-auto object-cover rounded-lg shadow-md">
+      </div>
+  
+      <!-- Product Details -->
+      <div class="lg:w-1/2 lg:ml-6">
+        <div class="flex  mb-6">
+            <h1 class="text-3xl font-semibold text-gray-800 text-center">{{ product.name }}</h1>
+          </div>
+          <div class="flex  mb-6">
+            <span class="text-xl text-gray-500">{{ product.category.name }}</span>
+          </div>
+        <p class="text-gray-600 mb-4">{{ product.description }}</p>
+  
+        <!-- Price and Promo Price -->
+        <div class="mb-4">
+          <div *ngIf="product.promo_price">
+            <p class="text-xl font-semibold text-red-600">
+              {{ product.promo_price }} DH
+              <span class="line-through text-gray-400">{{ product.price }} DH</span>
+            </p>
+          </div>
+          <div *ngIf="!product.promo_price">
+            <p class="text-xl font-semibold">{{ product.price }} DH</p>
+          </div>
+        </div>
+  
+        <div class="flex gap-4  mt-4">
+            <!-- Cart Icon (only show if stock > 0) -->
+            <div *ngIf="product.stock > 0" class="flex items-center gap-2">
+              <!-- Quantity Input -->
+              <input type="number" [(ngModel)]="product.quantity" min="1" [max]="product.stock" 
+                     class="w-16 p-2 border border-gray-300 rounded text-center text-gray-700" placeholder="Qty" />
+              
+              <!-- Add to Cart Button -->
+              <button (click)="addToCart(product.id, product.quantity)" class="text-blue-500 hover:text-blue-700">
+                <i class="fas fa-cart-plus"></i> <!-- Cart icon -->
+              </button>
+            </div>
+            
+      
+            <button (click)="toggleWishlist(product.id)" 
+            [ngClass]="{
+              'text-red-500': likedItems.includes(product.id), 
+              'text-white': !likedItems.includes(product.id)
+            }" >
+      <i class="fas fa-heart"></i> <!-- Wishlist icon -->
+    </button>
+          </div>
+          <div class="mt-2 text-sm text-gray-600">
+            <span *ngIf="product.stock > 0">Disponibilité: {{ product.stock }} en stock</span>
+            <span *ngIf="product.stock === 0" class="text-red-500">Rupture de stock</span>
+          </div>
+    
+      </div>
+    </div>
+  
+   
+
+  <app-custom-alert
+  *ngIf="showAlert"
+  (choice)="handleChoice($event)"
+></app-custom-alert>
+  
