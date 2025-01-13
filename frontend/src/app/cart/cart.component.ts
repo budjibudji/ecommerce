@@ -14,6 +14,7 @@ import { CheckoutComponent } from '../checkout/checkout.component';
 export class CartComponent implements OnInit {
   cartitems: any[] = [];
   outOfstock: any[] = [];
+  exeededstock: any[] = [];
   selectedItems: any[] = []; // Array to track selected items
   showCheckout: boolean = false;
 
@@ -26,6 +27,8 @@ export class CartComponent implements OnInit {
     this.productService.getCart().subscribe((data) => {
       this.cartitems = data.filter(({ product }) => product.stock > 0);
       this.outOfstock = data.filter(({ product }) => (product.stock = 0));
+      this.exeededstock = data.filter(({ product,quantity }) => (product.stock > 0 && product.stock<quantity));
+
     });
   }
   onSelectionChange(item: any): void {
