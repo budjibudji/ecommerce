@@ -22,6 +22,7 @@ import { CategoryComponent } from './category/category.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { CustomerTokenGuard } from './auth/customer.guard';
 import { RegisterCustomerComponent } from './register-customer/register-customer.component';
+import { CartComponent } from './cart/cart.component';
 
 export const routes: Routes = [
   {
@@ -56,6 +57,11 @@ export const routes: Routes = [
       {
         path: 'purchases',
         component: PurchasesListComponent,
+        canActivate: [CustomerTokenGuard],
+      },
+      {
+        path: 'cart',
+        component: CartComponent,
         canActivate: [CustomerTokenGuard],
       },
     ],

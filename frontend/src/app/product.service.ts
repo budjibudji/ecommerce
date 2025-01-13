@@ -42,6 +42,9 @@ export class ProductService {
   getWishlist(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiWishlistsUrl}`);
   }
+  getCart(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiCartsUrl}`);
+  }
   removeFromCart(id: number): Observable<any[]> {
     return this.http.delete<any[]>(`${this.apiCartsUrl}/${id}`);
   }

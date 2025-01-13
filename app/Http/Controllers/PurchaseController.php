@@ -69,7 +69,7 @@ class PurchaseController
                 'product_id' => $cart->product->id,
                 'purchase_recap_id' => $purchase->id,
                 'quantity' => $cart->quantity,
-                'price' => $cart->product->price,
+                'price' => $cart->product->promo_price ? $cart->product->promo_price : $cart->product->price, // Conditional price
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
