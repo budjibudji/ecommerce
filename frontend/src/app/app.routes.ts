@@ -53,6 +53,11 @@ export const routes: Routes = [
         component: WishlistComponent,
         canActivate: [CustomerTokenGuard],
       },
+      {
+        path: 'purchases',
+        component: PurchasesListComponent,
+        canActivate: [CustomerTokenGuard],
+      },
     ],
   },
   {

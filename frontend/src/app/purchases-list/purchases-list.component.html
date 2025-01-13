@@ -16,7 +16,7 @@
           <img [src]="'http://localhost:8000/storage/' + item.product.image" alt="Product Image" class="w-20 h-20 object-cover rounded-lg mr-4">
           <div class="flex-1">
             <h4 class="text-md font-semibold">{{ item.product.name }}</h4>
-            <p class="text-sm text-gray-600">{{ item.product.description }}</p>
+            <p class="text-sm text-gray-600">{{ item.product.description | slice:0:30 }}...</p>
             <p class="text-sm text-green-700 mt-2"><strong>Price:</strong> {{ item.product.price }} DH</p>
             <p class="text-sm text-gray-600"><strong>Quantity:</strong> {{ item.quantity }}</p>
           </div>

@@ -66,6 +66,7 @@ export class LayoutHomeComponent {
     }
     this.router.navigate(['/cart']);
   }
+
   toggleProfileDropdown() {
     this.isProfileDropdownOpen = !this.isProfileDropdownOpen;
   }
