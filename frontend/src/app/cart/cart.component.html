@@ -1,16 +1,16 @@
 <div class="container mx-auto p-6">
-  <h1 class="text-3xl font-semibold text-gray-800 mb-6">Cart</h1>
+  <h1 class="text-3xl font-semibold text-gray-800 mb-6">Panier</h1>
 
   <!-- In Stock Products Section -->
   <div *ngIf="selectedItems.length > 0" class="text-center mt-6">
     <button (click)="proceedToCheckout()" class="px-6 py-3 bg-green-700 text-white font-semibold rounded-lg hover:bg-green-800">
-      Proceed to Checkout
+      Procéder à la commande
     </button>
   </div>
   <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
-    <h3 class="text-xl font-medium text-gray-800">Products In stock:</h3>
-    <p><strong>Total in cart:</strong> {{ total(cartitems) }} DH</p>
-    <p><strong>Total of selected items:</strong> {{ total(selectedItems) }} DH</p>
+    <h3 class="text-xl font-medium text-gray-800">Produits en stock :</h3>
+    <p><strong>Total dans le panier :</strong> {{ total(cartitems) }} DH</p>
+    <p><strong>Total des articles sélectionnés :</strong> {{ total(selectedItems) }} DH</p>
 
     <div class="mt-6">
       <div *ngFor="let item of cartitems" class="bg-gray-100 p-4 rounded-lg mb-4">
@@ -24,7 +24,7 @@
           </div>
           
           <!-- Product Image -->
-          <img [src]="'http://localhost:8000/storage/' + item.product.image" alt="Product Image" class="w-20 h-20 object-cover rounded-lg mr-4">
+          <img [src]="'http://localhost:8000/storage/' + item.product.image" alt="Image du produit" class="w-20 h-20 object-cover rounded-lg mr-4">
           
           <!-- Product Details -->
           <div class="flex-1">
@@ -37,10 +37,10 @@
               <span class="text-green-700 font-semibold">{{ item.product.promo_price }} DH</span>
             </p>
             <p class="text-sm text-gray-600" *ngIf="!item.product.promo_price">
-              <strong>Price:</strong> {{ item.product.price }} DH
+              <strong>Prix :</strong> {{ item.product.price }} DH
             </p>
 
-            <p class="text-sm text-gray-600"><strong>Quantity:</strong> {{ item.quantity }}</p>
+            <p class="text-sm text-gray-600"><strong>Quantité :</strong> {{ item.quantity }}</p>
           </div>
 
           <!-- Delete Button (Trash Icon) -->
@@ -51,21 +51,22 @@
         
         <!-- Total Price for this item -->
         <div class="mt-2 text-right text-lg font-semibold text-green-700">
-          <p>Total: {{ calculateTotalPrice(item.product.promo_price || item.product.price, item.quantity) }} DH</p>
+          <p>Total : {{ calculateTotalPrice(item.product.promo_price || item.product.price, item.quantity) }} DH</p>
         </div>
       </div>
     </div>
   </div>
- <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
-    <h3 class="text-xl font-medium text-gray-800">Products Exceeded quantity of stock</h3>
-    <p><strong>Total:</strong> {{ total(exeededstock) }} DH</p>
+  
+  <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
+    <h3 class="text-xl font-medium text-gray-800">Produits en rupture de stock</h3>
+    <p><strong>Total :</strong> {{ total(exeededstock) }} DH</p>
 
     <div class="mt-6">
       <div *ngFor="let item of exeededstock" class="bg-gray-100 p-4 rounded-lg mb-4">
         <div class="flex items-center">
           
           <!-- Product Image -->
-          <img [src]="'http://localhost:8000/storage/' + item.product.image" alt="Product Image" class="w-20 h-20 object-cover rounded-lg mr-4">
+          <img [src]="'http://localhost:8000/storage/' + item.product.image" alt="Image du produit" class="w-20 h-20 object-cover rounded-lg mr-4">
           
           <!-- Product Details -->
           <div class="flex-1">
@@ -78,10 +79,10 @@
               <span class="text-green-700 font-semibold">{{ item.product.promo_price }} DH</span>
             </p>
             <p class="text-sm text-gray-600" *ngIf="!item.product.promo_price">
-              <strong>Price:</strong> {{ item.product.price }} DH
+              <strong>Prix :</strong> {{ item.product.price }} DH
             </p>
 
-            <p class="text-sm text-gray-600"><strong>Quantity:</strong> {{ item.quantity }}</p>
+            <p class="text-sm text-gray-600"><strong>Quantité :</strong> {{ item.quantity }}</p>
           </div>
           
           <!-- Delete Button (Trash Icon) -->
@@ -92,22 +93,23 @@
         
         <!-- Total Price for this item -->
         <div class="mt-2 text-right text-lg font-semibold text-green-700">
-          <p>Total: {{ calculateTotalPrice(item.product.promo_price || item.product.price, item.quantity) }} DH</p>
+          <p>Total : {{ calculateTotalPrice(item.product.promo_price || item.product.price, item.quantity) }} DH</p>
         </div>
       </div>
     </div>
   </div>
+
   <!-- Out of Stock Products Section -->
   <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
-    <h3 class="text-xl font-medium text-gray-800">Products out of stock</h3>
-    <p><strong>Total:</strong> {{ total(outOfstock) }} DH</p>
+    <h3 class="text-xl font-medium text-gray-800">Produits hors stock</h3>
+    <p><strong>Total :</strong> {{ total(outOfstock) }} DH</p>
 
     <div class="mt-6">
       <div *ngFor="let item of outOfstock" class="bg-gray-100 p-4 rounded-lg mb-4">
         <div class="flex items-center">
           
           <!-- Product Image -->
-          <img [src]="'http://localhost:8000/storage/' + item.product.image" alt="Product Image" class="w-20 h-20 object-cover rounded-lg mr-4">
+          <img [src]="'http://localhost:8000/storage/' + item.product.image" alt="Image du produit" class="w-20 h-20 object-cover rounded-lg mr-4">
           
           <!-- Product Details -->
           <div class="flex-1">
@@ -120,10 +122,10 @@
               <span class="text-green-700 font-semibold">{{ item.product.promo_price }} DH</span>
             </p>
             <p class="text-sm text-gray-600" *ngIf="!item.product.promo_price">
-              <strong>Price:</strong> {{ item.product.price }} DH
+              <strong>Prix :</strong> {{ item.product.price }} DH
             </p>
 
-            <p class="text-sm text-gray-600"><strong>Quantity:</strong> {{ item.quantity }}</p>
+            <p class="text-sm text-gray-600"><strong>Quantité :</strong> {{ item.quantity }}</p>
           </div>
           
           <!-- Delete Button (Trash Icon) -->
@@ -134,7 +136,7 @@
         
         <!-- Total Price for this item -->
         <div class="mt-2 text-right text-lg font-semibold text-green-700">
-          <p>Total: {{ calculateTotalPrice(item.product.promo_price || item.product.price, item.quantity) }} DH</p>
+          <p>Total : {{ calculateTotalPrice(item.product.promo_price || item.product.price, item.quantity) }} DH</p>
         </div>
       </div>
     </div>

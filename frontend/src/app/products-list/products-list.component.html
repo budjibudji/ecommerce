@@ -1,41 +1,40 @@
 <!-- products-list.component.html -->
 <div class="container mx-auto px-4 py-8">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold text-green-700">Product List</h1>
-      <a href="/admin/products/create" class="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-600">Create Product</a>
-    </div>
-  
-    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-      <thead class="bg-green-700 text-white">
-        <tr>
-          <th class="py-2 px-4 text-left">Name</th>
-          <th class="py-2 px-4 text-left">Description</th>
-          <th class="py-2 px-4 text-left">Price</th>
-          <th class="py-2 px-4 text-left">Promo Price</th>
-
-          <th class="py-2 px-4 text-left">Image</th> <!-- New column for Image -->
-          <th class="py-2 px-4 text-left">Stock</th>
-          <th class="py-2 px-4 text-left">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of products">
-          <td class="border-t px-4 py-2">{{ product.name }}</td>
-          <td class="border-t px-4 py-2">{{ product.description | slice:0:50 }}...</td>
-          <td class="border-t px-4 py-2">{{ product.price }}</td>
-          <td class="border-t px-4 py-2">{{ product.promo_price }}</td>
-
-          <td class="border-t px-4 py-2">
-            <!-- Image column with a small thumbnail -->
-            <img *ngIf="product.image" [src]="'http://localhost:8000/storage/' + product.image" alt="{{ product.name }}" class="w-16 h-16 object-cover rounded">
-          </td>
-          <td class="border-t px-4 py-2">{{ product.stock }}</td>
-          <td class="border-t px-4 py-2">
-            <a [routerLink]="['/admin/products/edit', product.id]" class="text-green-700 hover:text-green-500">Edit</a>
-            <button (click)="deleteProduct(product.id)" class="text-red-600 hover:text-red-400 ml-4">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-green-700">Liste des Produits</h1>
+    <a href="/admin/products/create" class="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-600">Créer un Produit</a>
   </div>
-  
+
+  <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+    <thead class="bg-green-700 text-white">
+      <tr>
+        <th class="py-2 px-4 text-left">Nom</th>
+        <th class="py-2 px-4 text-left">Description</th>
+        <th class="py-2 px-4 text-left">Prix</th>
+        <th class="py-2 px-4 text-left">Prix Promo</th>
+
+        <th class="py-2 px-4 text-left">Image</th> <!-- Nouvelle colonne pour l'Image -->
+        <th class="py-2 px-4 text-left">Stock</th>
+        <th class="py-2 px-4 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td class="border-t px-4 py-2">{{ product.name }}</td>
+        <td class="border-t px-4 py-2">{{ product.description | slice:0:50 }}...</td>
+        <td class="border-t px-4 py-2">{{ product.price }}</td>
+        <td class="border-t px-4 py-2">{{ product.promo_price }}</td>
+
+        <td class="border-t px-4 py-2">
+          <!-- Colonne de l'Image avec une petite vignette -->
+          <img *ngIf="product.image" [src]="'http://localhost:8000/storage/' + product.image" alt="{{ product.name }}" class="w-16 h-16 object-cover rounded">
+        </td>
+        <td class="border-t px-4 py-2">{{ product.stock }}</td>
+        <td class="border-t px-4 py-2">
+          <a [routerLink]="['/admin/products/edit', product.id]" class="text-green-700 hover:text-green-500">Modifier</a>
+          <button (click)="deleteProduct(product.id)" class="text-red-600 hover:text-red-400 ml-4">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

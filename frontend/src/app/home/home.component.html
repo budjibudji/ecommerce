@@ -26,7 +26,7 @@
           
           <!-- Button -->
           <button (click)="goToCategory(category.id)" class="bg-green-700 hover:bg-green-800 text-white py-2 px-6 rounded-lg">
-            Discover
+            Découvrir
           </button>
         </div>
       </div>
@@ -45,7 +45,7 @@
   
 
 
-<!-- new arrivage -->
+<!-- Nouveaux Arrivages -->
 <div class="container mx-auto px-4 py-8">
     <h2 class="text-2xl font-bold mb-6 text-center">Nouveaux Arrivages</h2>
     
@@ -62,7 +62,6 @@
         <div class="p-4">
             <a [routerLink]="['/product', product.id]">
                 <h3 class="text-lg font-semibold text-gray-800 text-center">{{ product.name }}</h3>
-
             </a>
 
           <p class="text-sm text-gray-500 text-center">{{ product.description | slice:0:30 }}...</p>
@@ -81,7 +80,7 @@
             <div *ngIf="product.stock > 0" class="flex items-center gap-2">
               <!-- Quantity Input -->
               <input type="number" [(ngModel)]="product.quantity" min="1" [max]="product.stock" 
-                     class="w-16 p-2 border border-gray-300 rounded text-center text-gray-700" placeholder="Qty" />
+                     class="w-16 p-2 border border-gray-300 rounded text-center text-gray-700" placeholder="Quantité" />
               
               <!-- Add to Cart Button -->
               <button (click)="addToCart(product.id, product.quantity)" class="text-blue-500 hover:text-blue-700">
@@ -108,16 +107,16 @@
     </div>
     <div class="text-center mt-6">
         <a routerLink="/new-arriving" class="inline-block px-6 py-2 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-lg">
-          Show More
+          Voir Plus
         </a>
       </div>
 
   </div>
   
 
-<!-- top seeling -->
+<!-- Meilleures Ventes -->
 <div class="container mx-auto px-4 py-8">
-    <h2 class="text-2xl font-bold mb-6 text-center">Top Selling</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center">Top des Ventes</h2>
     
     <!-- New Arrivals Section -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
@@ -149,7 +148,7 @@
             <div *ngIf="product.stock > 0" class="flex items-center gap-2">
               <!-- Quantity Input -->
               <input type="number" [(ngModel)]="product.quantity" min="1" [max]="product.stock" 
-                     class="w-16 p-2 border border-gray-300 rounded text-center text-gray-700" placeholder="Qty" />
+                     class="w-16 p-2 border border-gray-300 rounded text-center text-gray-700" placeholder="Quantité" />
               
               <!-- Add to Cart Button -->
               <button (click)="addToCart(product.id, product.quantity)" class="text-blue-500 hover:text-blue-700">
@@ -176,12 +175,12 @@
     </div>
     <div class="text-center mt-6">
         <a routerLink="/top-vente" class="inline-block px-6 py-2 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-lg">
-          Show More
+          Voir Plus
         </a>
       </div>
   </div>
   
-<!-- promo -->
+<!-- Promotions -->
 <div class="container mx-auto px-4 py-8">
     <h2 class="text-2xl font-bold mb-6 text-center">Promotions</h2>
     
@@ -214,7 +213,7 @@
             <div *ngIf="product.stock > 0" class="flex items-center gap-2">
               <!-- Quantity Input -->
               <input type="number" [(ngModel)]="product.quantity" min="1" [max]="product.stock" 
-                     class="w-16 p-2 border border-gray-300 rounded text-center text-gray-700" placeholder="Qty" />
+                     class="w-16 p-2 border border-gray-300 rounded text-center text-gray-700" placeholder="Quantité" />
               
               <!-- Add to Cart Button -->
               <button (click)="addToCart(product.id, product.quantity)" class="text-blue-500 hover:text-blue-700">
@@ -241,7 +240,7 @@
     </div>
     <div class="text-center mt-6">
         <a routerLink="/promotions" class="inline-block px-6 py-2 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-lg">
-          Show More
+          Voir Plus
         </a>
       </div>
   </div>

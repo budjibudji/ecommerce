@@ -1,16 +1,16 @@
 <!-- categories-list.component.html -->
 <div class="container mx-auto px-4 py-8">
   <div class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-bold text-green-700">Category List</h1>
-    <a href="/admin/categories/create" class="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-600">Create Category</a>
+    <h1 class="text-2xl font-bold text-green-700">Liste des catégories</h1>
+    <a href="/admin/categories/create" class="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-600">Créer une catégorie</a>
   </div>
 
   <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
     <thead class="bg-green-700 text-white">
       <tr>
-        <th class="py-2 px-4 text-left">Name</th>
+        <th class="py-2 px-4 text-left">Nom</th>
         <th class="py-2 px-4 text-left">Description</th>
-        <th class="py-2 px-4 text-left">Cover</th>
+        <th class="py-2 px-4 text-left">Couverture</th>
         <th class="py-2 px-4 text-left">Image</th>
         <th class="py-2 px-4 text-left">Actions</th>
       </tr>
@@ -32,7 +32,10 @@
           <img *ngIf="category.image" [src]="'http://localhost:8000/storage/' + category.image" alt="{{ category.name }}" class="w-16 h-16 object-cover rounded">
         </td>
         <td class="border-t px-4 py-2">
-          <a [routerLink]="['/admin/categories/edit', category.id]" class="text-green-700 hover:text-green-500">Edit</a>
-          <button (click)="deleteCategory(category.id)" class="text-red-600 hover:text-red-400 ml-4">Delete</button>
+          <a [routerLink]="['/admin/categories/edit', category.id]" class="text-green-700 hover:text-green-500">Modifier</a>
+          <button (click)="deleteCategory(category.id)" class="text-red-600 hover:text-red-400 ml-4">Supprimer</button>
         </td>
-     
+      </tr>
+    </tbody>
+  </table>
+</div>

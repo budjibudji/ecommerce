@@ -1,17 +1,16 @@
 <div class=" mx-auto p-6 bg-[#d0f2d9]">
-    <!-- Product Title and Category -->
-    
+    <!-- Titre du Produit et Catégorie -->
   
     <div class="flex flex-col lg:flex-row">
-      <!-- Product Image -->
+      <!-- Image du Produit -->
       <div class="lg:w-1/2 mb-6 lg:mb-0 flex justify-center">
-        <!-- Responsive image with object-cover for aspect ratio -->
+        <!-- Image responsive avec object-cover pour le ratio d'aspect -->
         <img [src]="'http://localhost:8000/storage/' + product.image"
              alt="{{ product.name }}"
              class="bg-white w-full max-w-sm h-auto object-cover rounded-lg shadow-md">
       </div>
   
-      <!-- Product Details -->
+      <!-- Détails du Produit -->
       <div class="lg:w-1/2 lg:ml-6">
         <div class="flex  mb-6">
             <h1 class="text-3xl font-semibold text-gray-800 text-center">{{ product.name }}</h1>
@@ -21,7 +20,7 @@
           </div>
         <p class="text-gray-600 mb-4">{{ product.description }}</p>
   
-        <!-- Price and Promo Price -->
+        <!-- Prix et Prix Promo -->
         <div class="mb-4">
           <div *ngIf="product.promo_price">
             <p class="text-xl font-semibold text-red-600">
@@ -35,15 +34,15 @@
         </div>
   
         <div class="flex gap-4  mt-4">
-            <!-- Cart Icon (only show if stock > 0) -->
+            <!-- Icône du Panier (afficher seulement si le stock > 0) -->
             <div *ngIf="product.stock > 0" class="flex items-center gap-2">
-              <!-- Quantity Input -->
+              <!-- Entrée Quantité -->
               <input type="number" [(ngModel)]="product.quantity" min="1" [max]="product.stock" 
                      class="w-16 p-2 border border-gray-300 rounded text-center text-gray-700" placeholder="Qty" />
               
-              <!-- Add to Cart Button -->
+              <!-- Bouton Ajouter au Panier -->
               <button (click)="addToCart(product.id, product.quantity)" class="text-blue-500 hover:text-blue-700">
-                <i class="fas fa-cart-plus"></i> <!-- Cart icon -->
+                <i class="fas fa-cart-plus"></i> <!-- Icône du Panier -->
               </button>
             </div>
             
@@ -53,7 +52,7 @@
               'text-red-500': likedItems.includes(product.id), 
               'text-white': !likedItems.includes(product.id)
             }" >
-      <i class="fas fa-heart"></i> <!-- Wishlist icon -->
+      <i class="fas fa-heart"></i> <!-- Icône de la Liste de Souhaits -->
     </button>
           </div>
           <div class="mt-2 text-sm text-gray-600">
@@ -70,4 +69,4 @@
   *ngIf="showAlert"
   (choice)="handleChoice($event)"
 ></app-custom-alert>
-  
+</div>

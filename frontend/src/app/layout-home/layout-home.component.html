@@ -23,19 +23,20 @@
       <section class="bg-white w-full py-2 border-b border-gray-200">
         <div class="container mx-auto flex items-center justify-start px-6">
           <!-- Logo on the left -->
-          <a routerLink="/" >          <img src="assets/images/logo.png" alt="Logo" class="h-12 w-auto">
+          <a routerLink="/" >
+            <img src="assets/images/logo.png" alt="Logo" class="h-12 w-auto">
           </a>
-
         </div>
       </section>
     </header>
-  <div class="bg-white sticky top-0 z-50 relative">
-    <div class="container mx-auto px-4 py-4 flex items-center justify-between bg-white  z-50">
+  
+    <div class="bg-white sticky top-0 z-50 relative">
+      <div class="container mx-auto px-4 py-4 flex items-center justify-between bg-white z-50">
         <!-- Left Section (Categories Dropdown) -->
         <div class="relative">
           <button id="categories-button" class="text-black font-bold flex items-center space-x-2" (click)="toggleDropdown()">
             <i class="fas fa-stream text-lg"></i>
-            <span>Categories</span>
+            <span>Catégories</span>
           </button>
       
           <!-- Categories Dropdown -->
@@ -55,13 +56,13 @@
       
         <!-- Center Section (Navigation Links) -->
         <div class="flex space-x-6 text-black hidden lg:flex">
-          <a routerLink="/" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="hover:text-gray-500">Acceuil</a>
+          <a routerLink="/" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="hover:text-gray-500">Accueil</a>
           <a routerLink="/top-vente" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="hover:text-gray-500">Top Vente</a>
           
           <a routerLink="/promotions" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="hover:text-gray-500">Promotions</a>
-          <a routerLink="/new-arriving" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="hover:text-gray-500">Nouvel arrivage</a>
+          <a routerLink="/new-arriving" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="hover:text-gray-500">Nouveaux Arrivages</a>
 
-          <a routerLink="/about" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="hover:text-gray-500">About</a>
+          <a routerLink="/about" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="hover:text-gray-500">À Propos</a>
         </div>
       
         <!-- Right Section (Profile & Icons) -->
@@ -77,15 +78,15 @@
               <ul class="py-2">
                 <!-- Show Logout option if logged in -->
                 <li *ngIf="isLoggedIn" class="px-4 py-2 hover:bg-gray-100">
-                  <a (click)="logout()" class="font-bold w-full cursor-pointer block">Logout</a>
+                  <a (click)="logout()" class="font-bold w-full cursor-pointer block">Se Déconnecter</a>
                 </li>
                 <li *ngIf="isLoggedIn" class="px-4 py-2 hover:bg-gray-100">
-                    <a routerLink="/purchases" class="font-bold w-full block">Purchases</a>
+                    <a routerLink="/purchases" class="font-bold w-full block">Achats</a>
                   </li>
       
                 <!-- Show Login and Inscription options if not logged in -->
                 <li *ngIf="!isLoggedIn" class="px-4 py-2 hover:bg-gray-100">
-                  <a routerLink="/login-customer" class="font-bold w-full block">Login</a>
+                  <a routerLink="/login-customer" class="font-bold w-full block">Connexion</a>
                 </li>
                 <li *ngIf="!isLoggedIn" class="px-4 py-2 hover:bg-gray-100">
                   <a routerLink="/register" class="font-bold w-full block">Inscription</a>
@@ -97,16 +98,12 @@
           <!-- Wishlist Icon -->
           <button class="flex items-center text-black font-bold" (click)="wishlist()">
             <i class="fas fa-heart text-xl"></i>
-        </button>
+          </button>
           
           <!-- Cart Icon -->
-         
           <button class="flex items-center text-black font-bold" (click)="cart()">
             <i class="fas fa-shopping-cart text-xl"></i>
-        </button>
-          
-
-
+          </button>
         </div>
       
         <!-- Mobile Burger Menu -->
@@ -116,42 +113,37 @@
           </button>
         </div>
       </div>
-      <div *ngIf="isMobileMenuOpen" class=" container mx-auto lg:hidden bg-white text-black px-4 py-4  z-50 absolute top-12 ">
+      <div *ngIf="isMobileMenuOpen" class="container mx-auto lg:hidden bg-white text-black px-4 py-4 z-50 absolute top-12">
         <ul class="space-y-4">
-          <a routerLink="/" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Acceuil</a>
+          <a routerLink="/" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Accueil</a>
           <a routerLink="/top-vente" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Top Vente</a>
           <a routerLink="/promotions" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Promotions</a>
-          <a routerLink="/new-arriving" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Nouvel arrivage</a>
-          <a routerLink="/about" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">About</a>
+          <a routerLink="/new-arriving" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Nouveaux Arrivages</a>
+          <a routerLink="/about" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">À Propos</a>
           
           <!-- Updated li items for Wishlist, Cart, Login, Register, and Logout -->
-         
-          <li  class="px-4 py-2 hover:bg-gray-100" (click)="cart()">
-            <span class="font-bold cursor-pointer">Cart</span>
+          <li class="px-4 py-2 hover:bg-gray-100" (click)="cart()">
+            <span class="font-bold cursor-pointer">Panier</span>
           </li>
-          <li  class="px-4 py-2 hover:bg-gray-100" (click)="wishlist()">
-            <span class="font-bold cursor-pointer">Wishlist</span>
+          <li class="px-4 py-2 hover:bg-gray-100" (click)="wishlist()">
+            <span class="font-bold cursor-pointer">Liste de Souhaits</span>
           </li>
           <li *ngIf="!isLoggedIn">
-            <a routerLink="/login-customer" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Login</a>
+            <a routerLink="/login-customer" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Connexion</a>
           </li>
           <li *ngIf="!isLoggedIn">
             <a routerLink="/register" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Inscription</a>
           </li>
           <li *ngIf="isLoggedIn">
-            <a routerLink="/purchases" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Purchases</a>
+            <a routerLink="/purchases" routerLinkActive="text-green-700 font-bold" [routerLinkActiveOptions]="{ exact: true }" class="block font-bold">Achats</a>
           </li>
           <li *ngIf="isLoggedIn" class="px-4 py-2 hover:bg-gray-100" (click)="logout()">
-            <span class="font-bold cursor-pointer">Logout</span>
+            <span class="font-bold cursor-pointer">Se Déconnecter</span>
           </li>
         </ul>
       </div>
     </div>
       
-      <!-- Mobile Menu (Dropdown) -->
-      
-      
-  
     <!-- Main Content -->
     <main class="flex-1">
       <router-outlet></router-outlet>
@@ -159,28 +151,27 @@
   
     <!-- Footer -->
     <footer class="bg-black text-white py-6">
-        <div class="container mx-auto text-center">
-          <!-- Copyright -->
-          <p>&copy; 2025 Day3ati. All Rights Reserved.</p>
-      
-          <!-- Contact Information -->
-          <div class="mt-4 space-y-2">
-            <p class="text-sm">
-              <strong>Phone:</strong> 06 10 15 09 31
-            </p>
-            <p class="text-sm">
-              <strong>Email:</strong> info&#64;day3ati.com
-            </p>
-            <p class="text-sm">
-              <strong>Address:</strong> Casablanca, Ensam 
-            </p>
-          </div>
+      <div class="container mx-auto text-center">
+        <!-- Copyright -->
+        <p>&copy; 2025 Day3ati. Tous droits réservés.</p>
+    
+        <!-- Contact Information -->
+        <div class="mt-4 space-y-2">
+          <p class="text-sm">
+            <strong>Téléphone:</strong> 06 10 15 09 31
+          </p>
+          <p class="text-sm">
+            <strong>Email:</strong> info&#64;day3ati.com
+          </p>
+          <p class="text-sm">
+            <strong>Adresse:</strong> Casablanca, Ensam
+          </p>
         </div>
-      </footer>
-      
-  </div>
-  
-  <app-custom-alert
+      </div>
+    </footer>
+</div>
+
+<app-custom-alert
   *ngIf="showAlert"
   (choice)="handleChoice($event)"
 ></app-custom-alert>

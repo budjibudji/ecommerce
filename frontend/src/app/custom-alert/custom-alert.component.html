@@ -4,7 +4,7 @@
     <div class="bg-white rounded-lg shadow-lg p-6 w-96" (click)="$event.stopPropagation()">
       <!-- Modal Header -->
       <div class="text-center mb-4">
-        <h2 class="text-lg font-semibold text-gray-800">You are not connected</h2>
+        <h2 class="text-lg font-semibold text-gray-800">Vous n'êtes pas connecté</h2>
       </div>
       <!-- Modal Footer -->
       <div class="flex justify-between mt-4">
@@ -12,21 +12,20 @@
           class="px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-700"
           (click)="onChoice('register')"
         >
-          Register
+          S'inscrire
         </button>
         <button
           class="px-4 py-2 bg-red-500 text-white font-semibold rounded-md hover:bg-red-700"
           (click)="onChoice('login')"
         >
-          Login
+          Se connecter
         </button>
         <button
           class="px-4 py-2 bg-gray-500 text-white font-semibold rounded-md hover:bg-gray-700"
           (click)="onChoice('cancel')"
         >
-          Cancel
+          Annuler
         </button>
       </div>
     </div>
-  </div>
-  
+</div>

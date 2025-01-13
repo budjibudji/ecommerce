@@ -1,69 +1,66 @@
-
-
-
-<!-- new arrivage -->
+<!-- Nouveaux Arrivages -->
 <div class="container mx-auto px-4 py-8">
-    <h2 class="text-2xl font-bold mb-6 text-center">Nouveaux Arrivages</h2>
-    
-    <!-- New Arrivals Section -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-      <div *ngFor="let product of newArrivals" class="bg-[#d0f2d9] rounded-lg shadow-md overflow-hidden w-full max-w-xs">
+  <h2 class="text-2xl font-bold mb-6 text-center">Nouveaux Arrivages</h2>
+  
+  <!-- Section des Nouveaux Arrivages -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+    <div *ngFor="let product of newArrivals" class="bg-[#d0f2d9] rounded-lg shadow-md overflow-hidden w-full max-w-xs">
+      <a [routerLink]="['/product', product.id]">
+
+      <img [src]="'http://localhost:8000/storage/' + product.image" 
+           alt="{{ product.name }}" class="w-full h-48 object-cover bg-white ">
+  </a>
+      <div class="p-4">
         <a [routerLink]="['/product', product.id]">
 
-        <img [src]="'http://localhost:8000/storage/' + product.image" 
-             alt="{{ product.name }}" class="w-full h-48 object-cover bg-white ">
-    </a>
-        <div class="p-4">
-          <a [routerLink]="['/product', product.id]">
-
-          <h3 class="text-lg font-semibold text-gray-800 text-center">{{ product.name }}</h3>
-          </a>
-          <p class="text-sm text-gray-500 text-center">{{ product.description | slice:0:30 }}...</p>
-    
-          <!-- Price Section -->
-          <div class="mt-4 text-center">
-            <div class="flex items-center justify-center space-x-2">
-              <span *ngIf="product.promo_price" class="text-gray-500 line-through">{{ product.price | currency }}</span>
-              <span class="text-xl font-bold text-green-700">{{ product.promo_price ? (product.promo_price | currency) : (product.price | currency) }}</span>
-            </div>
+        <h3 class="text-lg font-semibold text-gray-800 text-center">{{ product.name }}</h3>
+        </a>
+        <p class="text-sm text-gray-500 text-center">{{ product.description | slice:0:30 }}...</p>
+  
+        <!-- Section du Prix -->
+        <div class="mt-4 text-center">
+          <div class="flex items-center justify-center space-x-2">
+            <span *ngIf="product.promo_price" class="text-gray-500 line-through">{{ product.price | currency }}</span>
+            <span class="text-xl font-bold text-green-700">{{ product.promo_price ? (product.promo_price | currency) : (product.price | currency) }}</span>
+          </div>
+        </div>
+  
+        <!-- Icônes (Ajouter au Panier & Liste de Souhaits) -->
+        <div class="flex justify-center gap-4 items-center mt-4">
+          <!-- Icône du Panier (afficher uniquement si le stock > 0) -->
+          <div *ngIf="product.stock > 0" class="flex items-center gap-2">
+            <!-- Champ de Quantité -->
+            <input type="number" [(ngModel)]="product.quantity" min="1" [max]="product.stock" 
+                   class="w-16 p-2 border border-gray-300 rounded text-center text-gray-700" placeholder="Qté" />
+            
+            <!-- Bouton Ajouter au Panier -->
+            <button (click)="addToCart(product.id, product.quantity)" class="text-blue-500 hover:text-blue-700">
+              <i class="fas fa-cart-plus"></i> <!-- Icône du Panier -->
+            </button>
           </div>
     
-          <!-- Icons (Add to Cart & Wishlist) -->
-          <div class="flex justify-center gap-4 items-center mt-4">
-            <!-- Cart Icon (only show if stock > 0) -->
-            <div *ngIf="product.stock > 0" class="flex items-center gap-2">
-              <!-- Quantity Input -->
-              <input type="number" [(ngModel)]="product.quantity" min="1" [max]="product.stock" 
-                     class="w-16 p-2 border border-gray-300 rounded text-center text-gray-700" placeholder="Qty" />
-              
-              <!-- Add to Cart Button -->
-              <button (click)="addToCart(product.id, product.quantity)" class="text-blue-500 hover:text-blue-700">
-                <i class="fas fa-cart-plus"></i> <!-- Cart icon -->
-              </button>
-            </div>
-      
-            <button (click)="toggleWishlist(product.id)" 
-            [ngClass]="{
-              'text-red-500': likedItems.includes(product.id), 
-              'text-white': !likedItems.includes(product.id)
-            }" >
-      <i class="fas fa-heart"></i> <!-- Wishlist icon -->
-    </button>
-          </div>
-    
-          <!-- Stock Quantity -->
-          <div class="mt-2 text-center text-sm text-gray-600">
-            <span *ngIf="product.stock > 0">Disponibilité: {{ product.stock }} en stock</span>
-            <span *ngIf="product.stock === 0" class="text-red-500">Rupture de stock</span>
-          </div>
+          <button (click)="toggleWishlist(product.id)" 
+          [ngClass]="{
+            'text-red-500': likedItems.includes(product.id), 
+            'text-white': !likedItems.includes(product.id)
+          }" >
+    <i class="fas fa-heart"></i> <!-- Icône Liste de Souhaits -->
+  </button>
+        </div>
+  
+        <!-- Quantité en Stock -->
+        <div class="mt-2 text-center text-sm text-gray-600">
+          <span *ngIf="product.stock > 0">Disponibilité: {{ product.stock }} en stock</span>
+          <span *ngIf="product.stock === 0" class="text-red-500">Rupture de stock</span>
         </div>
       </div>
     </div>
-   
-
   </div>
-  
-  <app-custom-alert
-  *ngIf="showAlert"
-  (choice)="handleChoice($event)"
+ 
+
+</div>
+
+<app-custom-alert
+*ngIf="showAlert"
+(choice)="handleChoice($event)"
 ></app-custom-alert>

@@ -1,28 +1,28 @@
 <div class="container mx-auto p-6">
-  <h1 class="text-3xl font-semibold text-gray-800 mb-6">Purchase List</h1>
+  <h1 class="text-3xl font-semibold text-gray-800 mb-6">Liste des Achats</h1>
 
   <div *ngFor="let purchase of purchases" class="bg-white p-6 rounded-lg shadow-lg mb-6">
-    <h2 class="text-xl font-semibold text-green-700">Order ID: {{ purchase.id }}</h2>
-    <p><strong>Address:</strong> {{ purchase.address }}</p>
-    <p><strong>Phone Number:</strong> {{ purchase.phone_number }}</p>
-    <p><strong>Order Date:</strong> {{ purchase.created_at | date }}</p>
-    <p><strong>Total:</strong> {{ total(purchase.purchases) }} DH</p>
-    <p><strong>Client:</strong> {{ purchase.user.name }}</p>
+    <h2 class="text-xl font-semibold text-green-700">ID de Commande : {{ purchase.id }}</h2>
+    <p><strong>Adresse :</strong> {{ purchase.address }}</p>
+    <p><strong>Numéro de Téléphone :</strong> {{ purchase.phone_number }}</p>
+    <p><strong>Date de Commande :</strong> {{ purchase.created_at | date }}</p>
+    <p><strong>Total :</strong> {{ total(purchase.purchases) }} DH</p>
+    <p><strong>Client :</strong> {{ purchase.user.name }}</p>
 
     <div class="mt-6">
-      <h3 class="text-lg font-medium text-gray-800">Products:</h3>
+      <h3 class="text-lg font-medium text-gray-800">Produits :</h3>
       <div *ngFor="let item of purchase.purchases" class="bg-gray-100 p-4 rounded-lg mb-4">
         <div class="flex">
-          <img [src]="'http://localhost:8000/storage/' + item.product.image" alt="Product Image" class="w-20 h-20 object-cover rounded-lg mr-4">
+          <img [src]="'http://localhost:8000/storage/' + item.product.image" alt="Image du Produit" class="w-20 h-20 object-cover rounded-lg mr-4">
           <div class="flex-1">
             <h4 class="text-md font-semibold">{{ item.product.name }}</h4>
             <p class="text-sm text-gray-600">{{ item.product.description | slice:0:30 }}...</p>
-            <p class="text-sm text-green-700 mt-2"><strong>Price:</strong> {{ item.price }} DH</p>
-            <p class="text-sm text-gray-600"><strong>Quantity:</strong> {{ item.quantity }}</p>
+            <p class="text-sm text-green-700 mt-2"><strong>Prix :</strong> {{ item.price }} DH</p>
+            <p class="text-sm text-gray-600"><strong>Quantité :</strong> {{ item.quantity }}</p>
           </div>
         </div>
         <div class="mt-2 text-right text-lg font-semibold text-green-700">
-          <p>Total: {{ calculateTotalPrice(item.price, item.quantity) }} DH</p>
+          <p>Total : {{ calculateTotalPrice(item.price, item.quantity) }} DH</p>
         </div>
       </div>
     </div>

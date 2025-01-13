@@ -1,36 +1,35 @@
 <div class="flex justify-center items-center h-screen bg-gray-100">
-    <div class="bg-white p-8 rounded-lg shadow-lg w-96">
-      <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Admin Login</h2>
-      <form (ngSubmit)="onLogin()">
-        <div class="mb-4">
-          <label for="email" class="block text-gray-700">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="w-full p-3 border border-gray-300 rounded-lg"
-            [(ngModel)]="email"
-            required
-          />
-        </div>
-        <div class="mb-6">
-          <label for="password" class="block text-gray-700">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="w-full p-3 border border-gray-300 rounded-lg"
-            [(ngModel)]="password"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          class="w-full p-3 bg-green-700 text-white font-bold rounded-lg hover:bg-green-800 transition duration-300"
-        >
-          Login
-        </button>
-      </form>
-    </div>
+  <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Connexion Admin</h2>
+    <form (ngSubmit)="onLogin()">
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700">Adresse Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="w-full p-3 border border-gray-300 rounded-lg"
+          [(ngModel)]="email"
+          required
+        />
+      </div>
+      <div class="mb-6">
+        <label for="password" class="block text-gray-700">Mot de Passe</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="w-full p-3 border border-gray-300 rounded-lg"
+          [(ngModel)]="password"
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        class="w-full p-3 bg-green-700 text-white font-bold rounded-lg hover:bg-green-800 transition duration-300"
+      >
+        Connexion
+      </button>
+    </form>
   </div>
-  
+</div>
