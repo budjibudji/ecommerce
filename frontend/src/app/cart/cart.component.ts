@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router'; // <-- Import RouterModule here
 import { ProductService } from '../product.service';
 import { CheckoutComponent } from '../checkout/checkout.component';
-import { CustomAlertComponent } from '../custom-alert/custom-alert.component';
 
 @Component({
   selector: 'app-cart',
@@ -21,12 +20,14 @@ export class CartComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit() {
+    this.loadItems();
+  }
+  loadItems() {
     this.productService.getCart().subscribe((data) => {
       this.cartitems = data.filter(({ product }) => product.stock > 0);
       this.outOfstock = data.filter(({ product }) => (product.stock = 0));
     });
   }
-
   onSelectionChange(item: any): void {
     if (item.selected) {
       this.selectedItems.push(item);
@@ -35,6 +36,18 @@ export class CartComponent implements OnInit {
         (selectedItem) => selectedItem !== item
       );
     }
+  }
+  removeItemFromCart(item: any) {
+    this.productService.removeFromCart(item.id).subscribe(
+      () => {
+        this.loadItems();
+        alert('Deleted');
+      },
+      (error) => {
+        console.error('Error deleting:', error);
+        alert('Failed to delete');
+      }
+    );
   }
 
   // Proceed to checkout

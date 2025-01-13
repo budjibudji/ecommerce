@@ -17,12 +17,12 @@
           <div class="flex-1">
             <h4 class="text-md font-semibold">{{ item.product.name }}</h4>
             <p class="text-sm text-gray-600">{{ item.product.description | slice:0:30 }}...</p>
-            <p class="text-sm text-green-700 mt-2"><strong>Price:</strong> {{ item.product.price }} DH</p>
+            <p class="text-sm text-green-700 mt-2"><strong>Price:</strong> {{ item.price }} DH</p>
             <p class="text-sm text-gray-600"><strong>Quantity:</strong> {{ item.quantity }}</p>
           </div>
         </div>
         <div class="mt-2 text-right text-lg font-semibold text-green-700">
-          <p>Total: {{ calculateTotalPrice(item.product.price, item.quantity) }} DH</p>
+          <p>Total: {{ calculateTotalPrice(item.price, item.quantity) }} DH</p>
         </div>
       </div>
     </div>

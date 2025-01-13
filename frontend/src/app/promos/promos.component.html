@@ -5,9 +5,9 @@
     
     <!-- New Arrivals Section -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-      <div *ngFor="let product of promos" class="bg-green-200 rounded-lg shadow-md overflow-hidden w-full max-w-xs">
+      <div *ngFor="let product of promos" class="bg-[#d0f2d9] rounded-lg shadow-md overflow-hidden w-full max-w-xs">
         <img [src]="'http://localhost:8000/storage/' + product.image" 
-             alt="{{ product.name }}" class="w-full h-48 object-cover">
+             alt="{{ product.name }}" class="w-full h-48 object-cover bg-white ">
     
         <div class="p-4">
           <h3 class="text-lg font-semibold text-gray-800 text-center">{{ product.name }}</h3>

@@ -1,0 +1,48 @@
+<!-- Modal Overlay -->
+<div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+  <!-- Modal Container -->
+  <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Customer Register</h2>
+    <form (ngSubmit)="onCheckout()">
+      <div class="mb-6">
+        <label for="address" class="block text-gray-700">Adresse</label>
+        <textarea
+          id="address"
+          name="address"
+          class="w-full p-3 border border-gray-300 rounded-lg"
+          [(ngModel)]="address"
+          required
+        ></textarea>
+      </div>
+
+      <div class="mb-4">
+        <label for="phone_number" class="block text-gray-700">Phone Number</label>
+        <input
+          id="phone_number"
+          name="phone_number"
+          class="w-full p-3 border border-gray-300 rounded-lg"
+          [(ngModel)]="phone_number"
+          required
+        />
+      </div>
+
+      <!-- Button Container for Cancel and Checkout -->
+      <div class="flex gap-4">
+        <button
+          type="submit"
+          class="w-full p-3 bg-green-700 text-white font-bold rounded-lg hover:bg-green-800 transition duration-300"
+        >
+          Checkout
+        </button>
+        
+        <button
+          (click)="onChoice('cancel')"
+          type="button"  
+          class="w-full p-3 bg-gray-400 text-white font-bold rounded-lg hover:bg-gray-500 transition duration-300"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

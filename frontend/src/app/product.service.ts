@@ -10,6 +10,7 @@ export class ProductService {
   private apiUrl = 'http://localhost:8000/api/products'; // Update with your backend API URL
   private apiCartsUrl = 'http://localhost:8000/api/carts'; // Update with your backend API URL
   private apiWishlistsUrl = 'http://localhost:8000/api/wishlists'; // Update with your backend API URL
+  private apiPurchasesUrl = 'http://localhost:8000/api/purchases'; // Update with your backend API URL
 
   constructor(private http: HttpClient) {}
 
@@ -44,6 +45,18 @@ export class ProductService {
   }
   getCart(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiCartsUrl}`);
+  }
+
+  validateCart(
+    carts: number[],
+    address: string,
+    phone_number: string
+  ): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiPurchasesUrl}`, {
+      carts,
+      address,
+      phone_number,
+    });
   }
   removeFromCart(id: number): Observable<any[]> {
     return this.http.delete<any[]>(`${this.apiCartsUrl}/${id}`);
